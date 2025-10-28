@@ -1,0 +1,6 @@
+#ifndef PARTICIPANTES_H_INCLUDED
+#define PARTICIPANTES_H_INCLUDED
+
+void menuParticipantes();
+
+#endif // PARTICIPANTES_H_INCLUDED
