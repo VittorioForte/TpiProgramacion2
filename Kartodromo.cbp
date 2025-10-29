@@ -23,11 +23,13 @@
 		<Unit filename="Categorias.cpp" />
 		<Unit filename="Clientes.cpp" />
 		<Unit filename="Contratacion.cpp" />
+		<Unit filename="Fecha.cpp" />
 		<Unit filename="Participantes.cpp" />
 		<Unit filename="carrera.h" />
 		<Unit filename="categorias.h" />
 		<Unit filename="clientes.h" />
 		<Unit filename="contratacion.h" />
+		<Unit filename="fecha.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="participantes.h" />
 		<Extensions />
