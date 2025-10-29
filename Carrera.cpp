@@ -4,6 +4,25 @@
 
 using namespace std;
 
+class carrera{
+private:
+    bool estado;
+    int idCarrera, idCategoria, cantParticipantes;
+    double horaInicio;
+    //Fecha: fecha
+
+public:
+
+    //GETTERS
+
+
+    //SETTERS
+
+
+    //METODOS ADICIONALES
+};
+
+
 void menuCarreras(){
 
     int opcion;
