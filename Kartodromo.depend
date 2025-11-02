@@ -3,7 +3,7 @@
 	<iostream>
 	"clientes.h"
 
-1761758683 c:\users\vitto\onedrive\desktop\kartodromo\kartodromo\clientes.h
+1761760339 c:\users\vitto\onedrive\desktop\kartodromo\kartodromo\clientes.h
 
 1761691915 source:c:\users\vitto\onedrive\desktop\kartodromo\kartodromo\main.cpp
 	<iostream>
@@ -14,13 +14,14 @@
 	"participantes.h"
 	"carrera.h"
 
-1761760252 c:\users\vitto\onedrive\desktop\kartodromo\kartodromo\categorias.h
+1762119908 c:\users\vitto\onedrive\desktop\kartodromo\kartodromo\categorias.h
+	<string>
 
-1761758707 c:\users\vitto\onedrive\desktop\kartodromo\kartodromo\contratacion.h
+1761760343 c:\users\vitto\onedrive\desktop\kartodromo\kartodromo\contratacion.h
 
-1761758733 c:\users\vitto\onedrive\desktop\kartodromo\kartodromo\participantes.h
+1761760349 c:\users\vitto\onedrive\desktop\kartodromo\kartodromo\participantes.h
 
-1761758635 c:\users\vitto\onedrive\desktop\kartodromo\kartodromo\carrera.h
+1761760323 c:\users\vitto\onedrive\desktop\kartodromo\kartodromo\carrera.h
 
 1761758662 source:c:\users\vitto\onedrive\desktop\kartodromo\kartodromo\categorias.cpp
 	<iostream>
@@ -39,6 +40,6 @@
 	<cstdlib>
 	"carrera.h"
 
-1761758229 source:c:\users\vitto\onedrive\desktop\kartodromo\kartodromo\fecha.cpp
+1761760274 source:c:\users\vitto\onedrive\desktop\kartodromo\kartodromo\fecha.cpp
 	<iostream>
 

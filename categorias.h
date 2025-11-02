@@ -1,11 +1,15 @@
 #ifndef CATEGORIAS_H_INCLUDED
 #define CATEGORIAS_H_INCLUDED
+#include <string>
+
+using namespace std;
 
 class Categorias {
 private:
     bool estado;
-    int idCategoria, cantVueltas;
-    string nombreCat;
+    int idCategoria; //1 SI ES PROFESIONAL / 2 SI ES AMATEUR / 3 SI ES INFANTIL
+    int cantVueltas; //20 = PROFESIONAL / 15 = AMATEUR / 10 = INFANTIL
+    string nombreCat; //PROFESIONAL - 1 - 20 VUELTAS / AMATEUR - 2 - 15 VUELTAS / INFANTIL - 3 - 10 VUELTAS
 
 public:
 
@@ -18,7 +22,10 @@ public:
 
     //GETTERS
 
-
+    bool getEstado() const { return estado; }
+    int getIdCategoria() const { return idCategoria; }
+    int getCantVueltas() const { return cantVueltas; }
+    string getNombreCat() const { return nombreCat; }
 
     //SETTERS
 
@@ -31,14 +38,22 @@ public:
     }
 
     void setNombreCat(string aNombreCat){
+        nombreCat = aNombreCat;
+
+
         if(aNombreCat == "PROFESIONAL"){
-            aCantVueltas = 20;
+            cantVueltas = 20;
+            idCategoria = 1;
         }else if(aNombreCat == "AMATEUR"){
-            aCantVueltas = 15;
+            cantVueltas = 15;
+            idCategoria = 2;
         }else if(aNombreCat == "INFANTIL"){
-            aCantVueltas = 10;
+            cantVueltas = 10;
+            idCategoria = 3;
         }else {
             cout << "Categoria no Valida... " << endl;
+            cantVueltas = 0;
+            idCategoria = 0;
             estado = false;
         };
     }
@@ -49,7 +64,19 @@ public:
 
 
     //METODOS ADICIONALES
+    void cargar(){
+        cout << "Ingrese nombre de categoria en mayuscula(PROFESIONAL / AMATEUR / INFANTIL): ";
+        cin >> nombreCat;
+        setNombreCat(nombreCat);
+    }
 
+    void mostrar() const {
+        cout << "--------------------------------" << endl;
+        cout << "ID Categoria: " << idCategoria << endl;
+        cout << "Nombre: " << nombreCat << endl;
+        cout << "Cantidad de vueltas: " << cantVueltas << endl;
+        cout << "Estado: " << (estado ? "Activo" : "Inactivo") << endl;
+    }
 };
 
 
