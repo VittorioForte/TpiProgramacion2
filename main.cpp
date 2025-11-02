@@ -14,6 +14,9 @@ using namespace std;
 #include "carrera.h"
 
 
+void menuCarreras();
+void menuClientes();
+
 
 int main()
 {
@@ -27,7 +30,7 @@ int main()
 		system("cls");
 		cout << "-----MENU PRINCIPAL-----\n";
 		cout << "1) Carreras Historicas\n";
-		cout << "2) Participantes\n";
+		cout << "2) Nueva Carrera\n";
 		cout << "3) Clientes\n";
 		cout << "4) Contrataciones\n";
 		cout << "5) PODIO DE RECORDS\n";
@@ -41,10 +44,16 @@ int main()
 				menuCarreras();
 				break;
 			case 2:
-				//menuParticipantes();
+			    {
+			        system("cls");
+
+			        Categorias nuevaCarrera;
+			        nuevaCarrera.cargar();
+			        nuevaCarrera.mostrar();
+			    }
 				break;
 			case 3:
-				menuClientes();
+				//menuClientes();
 				break;
 			case 4:
 				//menuContratacion();

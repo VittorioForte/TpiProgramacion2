@@ -5,19 +5,20 @@
 
 1761760339 c:\users\vitto\onedrive\desktop\kartodromo\kartodromo\clientes.h
 
-1761691915 source:c:\users\vitto\onedrive\desktop\kartodromo\kartodromo\main.cpp
+1762120786 source:c:\users\vitto\onedrive\desktop\kartodromo\kartodromo\main.cpp
 	<iostream>
 	<cstdlib>
+	<string>
 	"categorias.h"
 	"clientes.h"
 	"contratacion.h"
 	"participantes.h"
 	"carrera.h"
 
-1762119908 c:\users\vitto\onedrive\desktop\kartodromo\kartodromo\categorias.h
+1762121160 c:\users\vitto\onedrive\desktop\kartodromo\kartodromo\categorias.h
 	<string>
 
-1761760343 c:\users\vitto\onedrive\desktop\kartodromo\kartodromo\contratacion.h
+1762119942 c:\users\vitto\onedrive\desktop\kartodromo\kartodromo\contratacion.h
 
 1761760349 c:\users\vitto\onedrive\desktop\kartodromo\kartodromo\participantes.h
 

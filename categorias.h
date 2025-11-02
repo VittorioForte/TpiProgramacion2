@@ -13,6 +13,13 @@ private:
 
 public:
 
+    Categorias() {
+        estado = false;
+        idCategoria = 0;
+        cantVueltas = 0;
+        nombreCat = "";
+    }
+
     Categorias (int aIdCategoria, int aCantVueltas, bool aEstado, string aNombreCat){
         setIdCategoria(aIdCategoria);
         setCantVueltas(aCantVueltas);
@@ -44,12 +51,15 @@ public:
         if(aNombreCat == "PROFESIONAL"){
             cantVueltas = 20;
             idCategoria = 1;
+            estado = true;
         }else if(aNombreCat == "AMATEUR"){
             cantVueltas = 15;
             idCategoria = 2;
+            estado = true;
         }else if(aNombreCat == "INFANTIL"){
             cantVueltas = 10;
             idCategoria = 3;
+            estado = true;
         }else {
             cout << "Categoria no Valida... " << endl;
             cantVueltas = 0;
@@ -65,7 +75,7 @@ public:
 
     //METODOS ADICIONALES
     void cargar(){
-        cout << "Ingrese nombre de categoria en mayuscula(PROFESIONAL / AMATEUR / INFANTIL): ";
+        cout << "Ingrese nombre de categoria en mayuscula (PROFESIONAL / AMATEUR / INFANTIL): ";
         cin >> nombreCat;
         setNombreCat(nombreCat);
     }
