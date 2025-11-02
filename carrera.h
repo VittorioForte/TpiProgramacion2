@@ -1,7 +1,7 @@
 #ifndef CARRERA_H_INCLUDED
 #define CARRERA_H_INCLUDED
 
-class carrera{
+class Carrera{
 private:
     bool estado;
     int idCarrera, idCategoria, cantParticipantes;

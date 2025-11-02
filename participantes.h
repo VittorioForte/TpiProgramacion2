@@ -1,7 +1,7 @@
 #ifndef PARTICIPANTES_H_INCLUDED
 #define PARTICIPANTES_H_INCLUDED
 
-class participantes {
+class Participantes {
 private:
     bool estado;
     int idCliente, tiempoVueltas;

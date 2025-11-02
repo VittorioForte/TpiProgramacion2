@@ -1,11 +1,11 @@
 # depslib dependency file v1.0
-1761688093 source:c:\users\vitto\onedrive\desktop\kartodromo\kartodromo\clientes.cpp
+1761758679 source:c:\users\vitto\onedrive\desktop\kartodromo\kartodromo\clientes.cpp
 	<iostream>
 	"clientes.h"
 
-1761688070 c:\users\vitto\onedrive\desktop\kartodromo\kartodromo\clientes.h
+1761758683 c:\users\vitto\onedrive\desktop\kartodromo\kartodromo\clientes.h
 
-1761689464 source:c:\users\vitto\onedrive\desktop\kartodromo\kartodromo\main.cpp
+1761691915 source:c:\users\vitto\onedrive\desktop\kartodromo\kartodromo\main.cpp
 	<iostream>
 	<cstdlib>
 	"categorias.h"
@@ -14,28 +14,31 @@
 	"participantes.h"
 	"carrera.h"
 
-1761615583 c:\users\vitto\onedrive\desktop\kartodromo\kartodromo\categorias.h
+1761760252 c:\users\vitto\onedrive\desktop\kartodromo\kartodromo\categorias.h
 
-1761615582 c:\users\vitto\onedrive\desktop\kartodromo\kartodromo\contratacion.h
+1761758707 c:\users\vitto\onedrive\desktop\kartodromo\kartodromo\contratacion.h
 
-1761689639 c:\users\vitto\onedrive\desktop\kartodromo\kartodromo\participantes.h
+1761758733 c:\users\vitto\onedrive\desktop\kartodromo\kartodromo\participantes.h
 
-1761688484 c:\users\vitto\onedrive\desktop\kartodromo\kartodromo\carrera.h
+1761758635 c:\users\vitto\onedrive\desktop\kartodromo\kartodromo\carrera.h
 
-1761688167 source:c:\users\vitto\onedrive\desktop\kartodromo\kartodromo\categorias.cpp
+1761758662 source:c:\users\vitto\onedrive\desktop\kartodromo\kartodromo\categorias.cpp
 	<iostream>
 	"categorias.h"
 
-1761688176 source:c:\users\vitto\onedrive\desktop\kartodromo\kartodromo\contratacion.cpp
+1761758702 source:c:\users\vitto\onedrive\desktop\kartodromo\kartodromo\contratacion.cpp
 	<iostream>
 	"contratacion.h"
 
-1761688180 source:c:\users\vitto\onedrive\desktop\kartodromo\kartodromo\participantes.cpp
+1761758725 source:c:\users\vitto\onedrive\desktop\kartodromo\kartodromo\participantes.cpp
 	<iostream>
 	"participantes.h"
 
-1761689559 source:c:\users\vitto\onedrive\desktop\kartodromo\kartodromo\carrera.cpp
+1761758646 source:c:\users\vitto\onedrive\desktop\kartodromo\kartodromo\carrera.cpp
 	<iostream>
 	<cstdlib>
 	"carrera.h"
+
+1761758229 source:c:\users\vitto\onedrive\desktop\kartodromo\kartodromo\fecha.cpp
+	<iostream>
 

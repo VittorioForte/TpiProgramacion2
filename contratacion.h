@@ -1,7 +1,7 @@
 #ifndef CONTRATACION_H_INCLUDED
 #define CONTRATACION_H_INCLUDED
 
-class contratacion {
+class ontratacion {
 private:
     bool estado;
     int idContratacion, idCliente, idCarrera;
