@@ -37,27 +37,31 @@ int main()
 		cout << "0) Salir\n";
 		cout << "Seleccione una opcion: \n";
 
-		cin >> opcion;
+                cin >> opcion;
 
-		switch (opcion){
-			case 1:
-				menuCarreras();
-				break;
-			case 2:
-			    {
-			        system("cls");
+                bool requierePausa = true;
 
-			        Categorias nuevaCarrera;
-			        nuevaCarrera.cargar();
-			        nuevaCarrera.mostrar();
-			    }
-				break;
-			case 3:
-				//menuClientes();
-				break;
-			case 4:
-				//menuContratacion();
-				break;
+                switch (opcion){
+                        case 1:
+                                menuCarreras();
+                                requierePausa = false;
+                                break;
+                        case 2:
+                            {
+                                system("cls");
+
+                                Categorias nuevaCarrera;
+                                nuevaCarrera.cargar();
+                                nuevaCarrera.mostrar();
+                            }
+                                break;
+                        case 3:
+                                menuClientes();
+                                requierePausa = false;
+                                break;
+                        case 4:
+                                //menuContratacion();
+                                break;
 			case 5:
 				//menuRecords();
 				break;
@@ -67,12 +71,14 @@ int main()
 
 			default:
 			    cout << "Opcion Invalida.\n";
-				break;
-		}
+                                break;
+                }
 
-		system("pause");
+                if (requierePausa) {
+                        system("pause");
+                }
 
-	} while (opcion != 0);
+        } while (opcion != 0);
 
 	return 0;
 }
