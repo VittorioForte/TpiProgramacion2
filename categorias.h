@@ -1,6 +1,7 @@
 #ifndef CATEGORIAS_H_INCLUDED
 #define CATEGORIAS_H_INCLUDED
 #include <string>
+#include <iostream>
 
 using namespace std;
 
