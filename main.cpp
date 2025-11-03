@@ -58,6 +58,7 @@ void menuInformes();
 void rankingPorCategoria();
 void podioGeneral();
 void clientesFrecuentes();
+void informeGeneralClientes();
 
 int main() {
     int opcion = -1;
@@ -70,6 +71,8 @@ int main() {
         cout << "3) Registro y control de carreras\n";
         cout << "4) Control de pagos y recaudacion\n";
         cout << "5) Informes y rankings\n";
+        cout << "6) Registrar carrera rapida\n";
+        cout << "7) Informe integral de clientes\n";
         cout << "0) Salir\n";
         cout << "Seleccione una opcion: ";
         cin >> opcion;
@@ -97,6 +100,12 @@ int main() {
                 break;
             case 5:
                 menuInformes();
+                break;
+            case 6:
+                registrarNuevaCarrera();
+                break;
+            case 7:
+                informeGeneralClientes();
                 break;
             case 0:
                 cout << "Saliendo del sistema..." << endl;
@@ -481,6 +490,8 @@ void listarCarrerasGenerales() {
     cargarParticipantesPorCarrera(carreras, participantesPorCarrera);
     map<int, Clientes> clientes = mapaClientesPorId();
 
+    streamsize precisionAnterior = cout.precision();
+    ios::fmtflags formatoAnterior = cout.flags();
     cout << fixed << setprecision(2);
     for (size_t i = 0; i < carreras.size(); ++i) {
         const Carrera &carrera = carreras[i];
@@ -495,7 +506,8 @@ void listarCarrerasGenerales() {
         cout << left << setw(15) << "ID Cliente" << setw(25) << "Nombre"
              << setw(15) << "Hora Final" << setw(20) << "Promedio x vuelta" << endl;
 
-        const auto &lista = (i < participantesPorCarrera.size()) ? participantesPorCarrera[i] : vector<Participantes>();
+        const vector<Participantes> vacio;
+        const vector<Participantes> &lista = (i < participantesPorCarrera.size()) ? participantesPorCarrera[i] : vacio;
         for (const auto &participante : lista) {
             if (!participante.getEstado()) {
                 continue;
@@ -513,6 +525,9 @@ void listarCarrerasGenerales() {
                  << setw(20) << promedio << endl;
         }
     }
+    cout.flags(formatoAnterior);
+    cout.precision(precisionAnterior);
+
     system("pause");
 }
 
@@ -591,9 +606,10 @@ void historialPorCliente() {
 
     cout << "Historial para " << clienteEncontrado.getNombre() << ' ' << clienteEncontrado.getApellido() << endl;
     bool tieneHistorial = false;
+    const vector<Participantes> vacio;
     for (size_t i = 0; i < carreras.size(); ++i) {
         const Carrera &carrera = carreras[i];
-        const auto &lista = (i < participantesPorCarrera.size()) ? participantesPorCarrera[i] : vector<Participantes>();
+        const vector<Participantes> &lista = (i < participantesPorCarrera.size()) ? participantesPorCarrera[i] : vacio;
         for (const auto &participante : lista) {
             if (participante.getEstado() && participante.getIdCliente() == clienteEncontrado.getIdCliente()) {
                 tieneHistorial = true;
@@ -623,6 +639,104 @@ void historialPorCliente() {
         }
         cout << "Total abonado por el cliente: $" << totalPagado << endl;
     }
+
+    system("pause");
+}
+
+void informeGeneralClientes() {
+    system("cls");
+    cout << "======= INFORME INTEGRAL DE CLIENTES =======" << endl;
+
+    vector<Clientes> clientes;
+    if (!cargarClientesActivos(clientes) || clientes.empty()) {
+        cout << "No hay clientes cargados." << endl;
+        system("pause");
+        return;
+    }
+
+    vector<Carrera> carreras;
+    cargarCarrerasActivas(carreras);
+
+    vector<vector<Participantes>> participantesPorCarrera;
+    if (!carreras.empty()) {
+        cargarParticipantesPorCarrera(carreras, participantesPorCarrera);
+    }
+
+    vector<Contratacion> contratos;
+    cargarContratacionesActivas(contratos);
+
+    streamsize precisionAnterior = cout.precision();
+    ios::fmtflags formatoAnterior = cout.flags();
+    cout << fixed << setprecision(2);
+    const vector<Participantes> vacioParticipantes;
+
+    for (const auto &cliente : clientes) {
+        cout << "======================================" << endl;
+        cout << "Cliente ID: " << cliente.getIdCliente() << " - " << cliente.getNombre() << ' '
+             << cliente.getApellido() << endl;
+        cout << "Telefono: " << cliente.getTelefono() << " | DNI: " << cliente.getDni() << endl;
+
+        bool participacionesMostradas = false;
+        for (size_t i = 0; i < carreras.size(); ++i) {
+            const Carrera &carrera = carreras[i];
+            const vector<Participantes> &lista = (i < participantesPorCarrera.size()) ? participantesPorCarrera[i] : vacioParticipantes;
+            for (const auto &participante : lista) {
+                if (!participante.getEstado() || participante.getIdCliente() != cliente.getIdCliente()) {
+                    continue;
+                }
+
+                if (!participacionesMostradas) {
+                    cout << "Participaciones:" << endl;
+                    participacionesMostradas = true;
+                }
+
+                cout << "  Carrera " << carrera.getIdCarrera() << " - " << nombreCategoria(carrera.getIdCategoria()) << endl;
+                cout << "    Fecha: ";
+                carrera.getFecha().mostrar();
+                double promedio = participante.calcularPromedio(vueltasPorCategoria(carrera.getIdCategoria()), carrera.getHoraInicio());
+                cout << "    Hora final: " << participante.getHoraFinal()
+                     << " | Promedio por vuelta: " << promedio << endl;
+                cout << "    Cantidad de participantes: " << carrera.getCantParticipantes() << endl;
+            }
+        }
+
+        if (!participacionesMostradas) {
+            cout << "Participaciones: No registra carreras." << endl;
+        }
+
+        bool pagosMostrados = false;
+        double totalPagado = 0.0;
+        for (const auto &contrato : contratos) {
+            if (contrato.getIdCliente() != cliente.getIdCliente()) {
+                continue;
+            }
+
+            if (!pagosMostrados) {
+                cout << "Pagos registrados:" << endl;
+                pagosMostrados = true;
+            }
+
+            cout << "  Contratacion " << contrato.getIdContratacion()
+                 << " - Carrera " << contrato.getIdCarrera()
+                 << " - Monto $" << contrato.getMonto() << endl;
+            cout << "    Fecha de pago: ";
+            contrato.getFechaPago().mostrar();
+            totalPagado += contrato.getMonto();
+        }
+
+        if (pagosMostrados) {
+            cout << "  Total abonado: $" << totalPagado << endl;
+        } else {
+            cout << "Pagos registrados: No se registran pagos." << endl;
+        }
+    }
+
+    if (!clientes.empty()) {
+        cout << "======================================" << endl;
+    }
+
+    cout.flags(formatoAnterior);
+    cout.precision(precisionAnterior);
 
     system("pause");
 }
