@@ -315,6 +315,8 @@ void mostrarCantidadCarrerasPorCategoria() {
         return;
     }
 
+    map<int, Clientes> clientes = mapaClientesPorId();
+
     map<int, int> conteo;
     for (const auto &carrera : carreras) {
         conteo[carrera.getIdCategoria()]++;
@@ -409,6 +411,13 @@ void registrarNuevaCarrera() {
     nueva.setEstado(true);
     nueva.setIdCarrera(obtenerProximoIdCarrera());
 
+    map<int, Clientes> clientesDisponibles = mapaClientesPorId();
+    if (clientesDisponibles.empty()) {
+        cout << "No hay clientes registrados. Registre clientes antes de crear una carrera." << endl;
+        system("pause");
+        return;
+    }
+
     int idCategoria;
     do {
         cout << "Seleccione categoria (1 Profesional / 2 Amateur / 3 Infantil): ";
@@ -446,6 +455,26 @@ void registrarNuevaCarrera() {
     }
     nueva.setHoraInicio(horaInicio);
 
+    int idClienteResponsable = 0;
+    bool clienteValido = false;
+    do {
+        cout << "ID del cliente responsable de la carrera: ";
+        cin >> idClienteResponsable;
+        if (cin.fail()) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Entrada invalida." << endl;
+            continue;
+        }
+        auto it = clientesDisponibles.find(idClienteResponsable);
+        if (it == clientesDisponibles.end()) {
+            cout << "No existe un cliente con ese ID. Intente nuevamente." << endl;
+        } else {
+            clienteValido = true;
+        }
+    } while (!clienteValido);
+    nueva.setIdClienteResponsable(idClienteResponsable);
+
     cout << "Ingrese la fecha de la carrera:" << endl;
     Fecha fecha;
     fecha.cargar();
@@ -463,7 +492,15 @@ void registrarNuevaCarrera() {
     for (int i = 0; i < cantidadParticipantes; ++i) {
         cout << "Participante " << (i + 1) << endl;
         Participantes participante;
-        participante.cargar(vueltas);
+        bool participanteValido = false;
+        do {
+            participante.cargar(vueltas);
+            if (clientesDisponibles.find(participante.getIdCliente()) == clientesDisponibles.end()) {
+                cout << "El ID de cliente ingresado no existe. Ingrese nuevamente los datos del participante." << endl;
+            } else {
+                participanteValido = true;
+            }
+        } while (!participanteValido);
         if (!participante.grabarEnDisco()) {
             errorParticipantes = true;
             cout << "No se pudo guardar el participante." << endl;
@@ -502,6 +539,15 @@ void listarCarrerasGenerales() {
         cout << "Hora inicio: " << carrera.getHoraInicio() << endl;
         cout << "Fecha: ";
         carrera.getFecha().mostrar();
+
+        string responsable = "Sin asignar";
+        string contacto = "";
+        auto itResponsable = clientes.find(carrera.getIdClienteResponsable());
+        if (itResponsable != clientes.end()) {
+            responsable = string(itResponsable->second.getNombre()) + " " + itResponsable->second.getApellido();
+            contacto = string(" | Mail: ") + itResponsable->second.getMail();
+        }
+        cout << "Cliente responsable: " << responsable << contacto << endl;
 
         cout << left << setw(15) << "ID Cliente" << setw(25) << "Nombre"
              << setw(15) << "Hora Final" << setw(20) << "Promedio x vuelta" << endl;
@@ -548,6 +594,8 @@ void consultarCarrerasPorFecha() {
         return;
     }
 
+    map<int, Clientes> clientesResponsables = mapaClientesPorId();
+
     bool encontrado = false;
     for (const auto &carrera : carreras) {
         if (fechaEnRango(carrera.getFecha(), desde, hasta)) {
@@ -555,6 +603,13 @@ void consultarCarrerasPorFecha() {
             cout << "Carrera ID: " << carrera.getIdCarrera() << " - Categoria: "
                  << nombreCategoria(carrera.getIdCategoria()) << " - Fecha: ";
             carrera.getFecha().mostrar();
+            auto it = clientesResponsables.find(carrera.getIdClienteResponsable());
+            if (it != clientesResponsables.end()) {
+                cout << "Responsable: " << it->second.getNombre() << ' ' << it->second.getApellido()
+                     << " | Mail: " << it->second.getMail() << endl;
+            } else if (carrera.getIdClienteResponsable() != 0) {
+                cout << "Responsable: ID " << carrera.getIdClienteResponsable() << endl;
+            }
         }
     }
 
@@ -605,6 +660,7 @@ void historialPorCliente() {
     cargarParticipantesPorCarrera(carreras, participantesPorCarrera);
 
     cout << "Historial para " << clienteEncontrado.getNombre() << ' ' << clienteEncontrado.getApellido() << endl;
+    cout << "Mail: " << clienteEncontrado.getMail() << " | Telefono: " << clienteEncontrado.getTelefono() << endl;
     bool tieneHistorial = false;
     const vector<Participantes> vacio;
     for (size_t i = 0; i < carreras.size(); ++i) {
@@ -620,6 +676,9 @@ void historialPorCliente() {
                 double promedio = participante.calcularPromedio(vueltasPorCategoria(carrera.getIdCategoria()),
                                                                  carrera.getHoraInicio());
                 cout << "Promedio por vuelta: " << promedio << endl;
+                if (carrera.getIdClienteResponsable() == clienteEncontrado.getIdCliente()) {
+                    cout << "Cliente responsable de la carrera." << endl;
+                }
                 cout << "-----------------------------" << endl;
             }
         }
@@ -674,7 +733,8 @@ void informeGeneralClientes() {
         cout << "======================================" << endl;
         cout << "Cliente ID: " << cliente.getIdCliente() << " - " << cliente.getNombre() << ' '
              << cliente.getApellido() << endl;
-        cout << "Telefono: " << cliente.getTelefono() << " | DNI: " << cliente.getDni() << endl;
+        cout << "Telefono: " << cliente.getTelefono() << " | Mail: " << cliente.getMail()
+             << " | DNI: " << cliente.getDni() << endl;
 
         bool participacionesMostradas = false;
         for (size_t i = 0; i < carreras.size(); ++i) {
@@ -697,6 +757,9 @@ void informeGeneralClientes() {
                 cout << "    Hora final: " << participante.getHoraFinal()
                      << " | Promedio por vuelta: " << promedio << endl;
                 cout << "    Cantidad de participantes: " << carrera.getCantParticipantes() << endl;
+                if (carrera.getIdClienteResponsable() == cliente.getIdCliente()) {
+                    cout << "    Responsable de la carrera." << endl;
+                }
             }
         }
 

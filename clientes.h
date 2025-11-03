@@ -11,6 +11,7 @@ private:
     char apellido[30];
     char telefono[20];
     char dni[10];
+    char mail[40];
 
 public:
     Clientes();
@@ -21,6 +22,7 @@ public:
     const char *getApellido() const;
     const char *getTelefono() const;
     const char *getDni() const;
+    const char *getMail() const;
     bool getEstado() const;
 
     //SETTERS
@@ -29,6 +31,7 @@ public:
     void setApellido(const char *aApellido);
     void setTelefono(const char *aTelefono);
     void setDni(const char *aDni);
+    void setMail(const char *aMail);
     void setEstado(bool aEstado);
 
     //METODOS ADICIONALES

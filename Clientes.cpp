@@ -18,6 +18,7 @@ Clientes::Clientes() {
     apellido[0] = '\0';
     telefono[0] = '\0';
     dni[0] = '\0';
+    mail[0] = '\0';
 }
 
 int Clientes::getIdCliente() const { return idCliente; }
@@ -25,6 +26,7 @@ const char *Clientes::getNombre() const { return nombre; }
 const char *Clientes::getApellido() const { return apellido; }
 const char *Clientes::getTelefono() const { return telefono; }
 const char *Clientes::getDni() const { return dni; }
+const char *Clientes::getMail() const { return mail; }
 bool Clientes::getEstado() const { return estado; }
 
 void Clientes::setIdCliente(int aId) { idCliente = aId; }
@@ -57,6 +59,13 @@ void Clientes::setDni(const char *aDni) {
     }
 }
 
+void Clientes::setMail(const char *aMail) {
+    if (aMail != nullptr) {
+        strncpy(mail, aMail, sizeof(mail) - 1);
+        mail[sizeof(mail) - 1] = '\0';
+    }
+}
+
 void Clientes::setEstado(bool aEstado) { estado = aEstado; }
 
 void Clientes::cargar(int nuevoId) {
@@ -73,6 +82,9 @@ void Clientes::cargar(int nuevoId) {
     cout << "Telefono: ";
     cin.getline(telefono, sizeof(telefono));
 
+    cout << "Mail: ";
+    cin.getline(mail, sizeof(mail));
+
     cout << "DNI: ";
     cin.getline(dni, sizeof(dni));
 }
@@ -82,6 +94,7 @@ void Clientes::mostrar() const {
     cout << "Nombre: " << nombre << "\n";
     cout << "Apellido: " << apellido << "\n";
     cout << "Telefono: " << telefono << "\n";
+    cout << "Mail: " << mail << "\n";
     cout << "DNI: " << dni << "\n";
     cout << "Estado: " << (estado ? "Activo" : "Inactivo") << "\n";
 }

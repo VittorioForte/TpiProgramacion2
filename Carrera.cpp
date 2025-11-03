@@ -16,6 +16,7 @@ Carrera::Carrera() {
     idCategoria = 0;
     cantParticipantes = 0;
     horaInicio = 0.0;
+    idClienteResponsable = 0;
 }
 
 bool Carrera::getEstado() const { return estado; }
@@ -24,6 +25,7 @@ int Carrera::getIdCategoria() const { return idCategoria; }
 int Carrera::getCantParticipantes() const { return cantParticipantes; }
 double Carrera::getHoraInicio() const { return horaInicio; }
 Fecha Carrera::getFecha() const { return fecha; }
+int Carrera::getIdClienteResponsable() const { return idClienteResponsable; }
 
 void Carrera::setEstado(bool aEstado) { estado = aEstado; }
 void Carrera::setIdCarrera(int aIdCarrera) { idCarrera = aIdCarrera; }
@@ -31,6 +33,7 @@ void Carrera::setIdCategoria(int aIdCategoria) { idCategoria = aIdCategoria; }
 void Carrera::setCantParticipantes(int aCantidad) { cantParticipantes = aCantidad; }
 void Carrera::setHoraInicio(double aHoraInicio) { horaInicio = aHoraInicio; }
 void Carrera::setFecha(const Fecha &aFecha) { fecha = aFecha; }
+void Carrera::setIdClienteResponsable(int aIdCliente) { idClienteResponsable = aIdCliente; }
 
 void Carrera::cargarCabecera() {
     setEstado(true);
@@ -47,6 +50,9 @@ void Carrera::cargarCabecera() {
     cout << "Hora de inicio (en minutos decimales): ";
     cin >> horaInicio;
 
+    cout << "ID del cliente responsable: ";
+    cin >> idClienteResponsable;
+
     cout << "Fecha de la carrera" << endl;
     fecha.cargar();
 }
@@ -56,6 +62,7 @@ void Carrera::mostrarCabecera() const {
     cout << "Categoria: " << idCategoria << '\n';
     cout << "Participantes: " << cantParticipantes << '\n';
     cout << "Hora de inicio: " << fixed << setprecision(2) << horaInicio << '\n';
+    cout << "Cliente responsable: " << idClienteResponsable << '\n';
     cout << "Fecha: ";
     fecha.mostrar();
     cout << "Estado: " << (estado ? "Activa" : "Inactiva") << "\n";

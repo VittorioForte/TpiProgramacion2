@@ -12,6 +12,7 @@ private:
     int cantParticipantes;
     double horaInicio;
     Fecha fecha;
+    int idClienteResponsable;
 
 public:
     Carrera();
@@ -23,6 +24,7 @@ public:
     int getCantParticipantes() const;
     double getHoraInicio() const;
     Fecha getFecha() const;
+    int getIdClienteResponsable() const;
 
     //SETTERS
     void setEstado(bool aEstado);
@@ -31,6 +33,7 @@ public:
     void setCantParticipantes(int aCantidad);
     void setHoraInicio(double aHoraInicio);
     void setFecha(const Fecha &aFecha);
+    void setIdClienteResponsable(int aIdCliente);
 
     //METODOS ADICIONALES
     void cargarCabecera();
