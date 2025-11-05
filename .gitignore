@@ -1,0 +1,21 @@
+# Archivos compilados
+*.exe
+*.o
+*.a
+*.so
+*.dll
+
+# Carpetas de compilación
+bin/
+obj/
+
+# Archivos de datos
+*.dat
+
+# Archivos de configuración de Code::Blocks
+*.layout
+*.depend
+
+# Archivos de configuración de otros IDEs
+.idea/
+.vscode/
