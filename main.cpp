@@ -41,7 +41,7 @@ int main()
 
 		switch (opcion){
 			case 1:
-				menuCarreras();
+				//menuCarreras();
 				break;
 			case 2:
 			    {
