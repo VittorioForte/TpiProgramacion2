@@ -1,0 +1,72 @@
+# depslib dependency file v1.0
+1762363896 source:c:\users\vitto\onedrive\desktop\kartodromo\kai\kartai\carrera.cpp
+	<iostream>
+	<cstdio>
+	<iomanip>
+	<cstdlib>
+	"carrera.h"
+
+1762363896 c:\users\vitto\onedrive\desktop\kartodromo\kai\kartai\carrera.h
+	"fecha.h"
+	"categorias.h"
+
+1762363896 c:\users\vitto\onedrive\desktop\kartodromo\kai\kartai\fecha.h
+
+1762363896 c:\users\vitto\onedrive\desktop\kartodromo\kai\kartai\categorias.h
+	<string>
+	<iostream>
+
+1762363896 source:c:\users\vitto\onedrive\desktop\kartodromo\kai\kartai\categorias.cpp
+	<iostream>
+	"categorias.h"
+
+1762363896 source:c:\users\vitto\onedrive\desktop\kartodromo\kai\kartai\clientes.cpp
+	<iostream>
+	<cstring>
+	<limits>
+	<cstdio>
+	<cstdlib>
+	"clientes.h"
+
+1762363896 c:\users\vitto\onedrive\desktop\kartodromo\kai\kartai\clientes.h
+	<cstdio>
+
+1762363896 source:c:\users\vitto\onedrive\desktop\kartodromo\kai\kartai\contratacion.cpp
+	<iostream>
+	<cstdio>
+	<iomanip>
+	"contratacion.h"
+
+1762363896 c:\users\vitto\onedrive\desktop\kartodromo\kai\kartai\contratacion.h
+	"fecha.h"
+
+1762364521 source:c:\users\vitto\onedrive\desktop\kartodromo\kai\kartai\fecha.cpp
+	<iostream>
+	<iomanip>
+	"fecha.h"
+
+1762363896 source:c:\users\vitto\onedrive\desktop\kartodromo\kai\kartai\main.cpp
+	<iostream>
+	<cstdlib>
+	<string>
+	<vector>
+	<algorithm>
+	<map>
+	<set>
+	<numeric>
+	<limits>
+	<iomanip>
+	"categorias.h"
+	"clientes.h"
+	"contratacion.h"
+	"participantes.h"
+	"carrera.h"
+
+1762363896 c:\users\vitto\onedrive\desktop\kartodromo\kai\kartai\participantes.h
+
+1762363896 source:c:\users\vitto\onedrive\desktop\kartodromo\kai\kartai\participantes.cpp
+	<iostream>
+	<iomanip>
+	<cstdio>
+	"participantes.h"
+
