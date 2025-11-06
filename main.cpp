@@ -1,6 +1,11 @@
 #include <iostream>
 #include <cstdlib>
-#include "MenuClientes.h"
+#include "menuClientes.h"
+#include "Clientes.h"
+#include "MenuCarreras.h"
+#include "Carrera.h"
+#include "Participantes.h"
+
 using namespace std;
 
 int main() {
@@ -23,7 +28,7 @@ int main() {
 
         switch (opcion) {
             case 1: menuClientes(); break;
-            case 2: cout << "menuCarreras"; break;
+            case 2: menuCarreras() ; break;
             case 3: cout << "menuPagos"; break;
             case 4: cout << "menuListados"; break;
             case 0: cout << "Saliendo del sistema..."; break;

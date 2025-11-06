@@ -32,40 +32,34 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="Carrera.cpp">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="Carrera.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
+		<Unit filename="Carrera.cpp" />
+		<Unit filename="Carrera.h" />
 		<Unit filename="Categorias.cpp">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="Categorias.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
-		<Unit filename="Clientes.cpp">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="Clientes.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
+		<Unit filename="Clientes.cpp" />
+		<Unit filename="Clientes.h" />
 		<Unit filename="Contratacion.cpp">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="Contratacion.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
-		<Unit filename="Fecha.cpp">
+		<Unit filename="Fecha.cpp" />
+		<Unit filename="Fecha.h" />
+		<Unit filename="MenuCarreras.cpp" />
+		<Unit filename="MenuCarreras.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
-		<Unit filename="Fecha.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="Participantes.cpp">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="Participantes.h">
+		<Unit filename="MenuClientes.cpp" />
+		<Unit filename="MenuClientes.h" />
+		<Unit filename="Participantes.cpp" />
+		<Unit filename="Participantes.h" />
+		<Unit filename="archivoCarreras.cpp" />
+		<Unit filename="archivoCarreras.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="archivoClientes.cpp" />
@@ -73,12 +67,6 @@
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="main.cpp" />
-		<Unit filename="menuClientes.cpp">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="menuClientes.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>

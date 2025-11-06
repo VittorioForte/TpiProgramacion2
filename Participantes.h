@@ -4,23 +4,26 @@
 class Participantes {
 private:
     bool estado;
-    int idCliente, tiempoVueltas;
+    int idCliente;
+    int idCarrera;
     double horaFinal;
+    int tiempoVueltas;
 
 public:
+    bool getEstado() const { return estado; }
+    int getIdCliente() const { return idCliente; }
+    int getIdCarrera() const { return idCarrera; }
+    double getHoraFinal() const { return horaFinal; }
+    int getTiempoVueltas() const { return tiempoVueltas; }
 
-    //GETTERS
-    int getIdCliente();
-    int getHoraFinal();
-    int getTiempoVueltas();
-    bool getEstado();
+    void setEstado(bool e) { estado = e; }
+    void setIdCliente(int id) { idCliente = id; }
+    void setIdCarrera(int id) { idCarrera = id; }
+    void setHoraFinal(double h) { horaFinal = h; }
+    void setTiempoVueltas(int t) { tiempoVueltas = t; }
 
-    //SETTERS
-
-
-    //METODOS ADICIONALES
+    bool escribirDisco(int pos);
+    bool leerDisco(int pos);
 };
-
-void menuParticipantes();
 
 #endif // PARTICIPANTES_H_INCLUDED

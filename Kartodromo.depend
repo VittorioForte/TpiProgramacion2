@@ -1,0 +1,75 @@
+# depslib dependency file v1.0
+1762435715 source:c:\users\vitto\onedrive\desktop\kartodromo\tpiprogramacion2-main\tpiprogramacion2-main\archivoclientes.cpp
+	<cstdio>
+	"ArchivoClientes.h"
+
+1762435715 c:\users\vitto\onedrive\desktop\kartodromo\tpiprogramacion2-main\tpiprogramacion2-main\archivoclientes.h
+	<string>
+	"Clientes.h"
+
+1762445366 c:\users\vitto\onedrive\desktop\kartodromo\tpiprogramacion2-main\tpiprogramacion2-main\clientes.h
+
+1762439464 source:c:\users\vitto\onedrive\desktop\kartodromo\tpiprogramacion2-main\tpiprogramacion2-main\main.cpp
+	<iostream>
+	<cstdlib>
+	"menuClientes.h"
+	"Clientes.h"
+	"MenuCarreras.h"
+	"Carrera.h"
+	"Participantes.h"
+
+1762435715 c:\users\vitto\onedrive\desktop\kartodromo\tpiprogramacion2-main\tpiprogramacion2-main\menuclientes.h
+
+1762435715 source:c:\users\vitto\onedrive\desktop\kartodromo\tpiprogramacion2-main\tpiprogramacion2-main\menuclientes.cpp
+	<iostream>
+	<cstdlib>
+	"Clientes.h"
+	"ArchivoClientes.h"
+
+1762435715 source:c:\users\vitto\onedrive\desktop\kartodromo\tpiprogramacion2-main\tpiprogramacion2-main\clientes.cpp
+	<iostream>
+	<cstring>
+	"Clientes.h"
+
+1762446103 source:c:\users\vitto\onedrive\desktop\kartodromo\tpiprogramacion2-main\tpiprogramacion2-main\carrera.cpp
+	<iostream>
+	<cstdio>
+	"Carrera.h"
+	"Fecha.h"
+
+1762444421 c:\users\vitto\onedrive\desktop\kartodromo\tpiprogramacion2-main\tpiprogramacion2-main\carrera.h
+	"Fecha.h"
+
+1762444396 source:c:\users\vitto\onedrive\desktop\kartodromo\tpiprogramacion2-main\tpiprogramacion2-main\archivocarreras.cpp
+	<iostream>
+	<cstdio>
+	"archivoCarreras.h"
+
+1762444385 c:\users\vitto\onedrive\desktop\kartodromo\tpiprogramacion2-main\tpiprogramacion2-main\archivocarreras.h
+	<string>
+	"Carrera.h"
+
+1762438630 c:\users\vitto\onedrive\desktop\kartodromo\tpiprogramacion2-main\tpiprogramacion2-main\menucarreras.h
+
+1762447710 source:c:\users\vitto\onedrive\desktop\kartodromo\tpiprogramacion2-main\tpiprogramacion2-main\menucarreras.cpp
+	<iostream>
+	<cstdlib>
+	"MenuCarreras.h"
+	"archivoCarreras.h"
+	"Carrera.h"
+	"Clientes.h"
+	"Participantes.h"
+
+1762445962 c:\users\vitto\onedrive\desktop\kartodromo\tpiprogramacion2-main\tpiprogramacion2-main\participantes.h
+
+1762446358 source:c:\users\vitto\onedrive\desktop\kartodromo\tpiprogramacion2-main\tpiprogramacion2-main\participantes.cpp
+	<cstdio>
+	"Participantes.h"
+
+1762441597 c:\users\vitto\onedrive\desktop\kartodromo\tpiprogramacion2-main\tpiprogramacion2-main\fecha.h
+	<iostream>
+	<ctime>
+
+1762441611 source:c:\users\vitto\onedrive\desktop\kartodromo\tpiprogramacion2-main\tpiprogramacion2-main\fecha.cpp
+	"Fecha.h"
+
