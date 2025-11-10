@@ -1,12 +1,30 @@
 #include <iostream>
 #include <cstdio>
+#include <algorithm>
 #include "Carrera.h"
 #include "Fecha.h"
+#include "Categorias.h"
 using namespace std;
 
+void Carrera::setNombreCategoria(const std::string &valor) {
+    fill_n(nombreCategoria, sizeof(nombreCategoria), '\0');
+    size_t length = min(valor.size(), sizeof(nombreCategoria) - 1);
+    valor.copy(nombreCategoria, length);
+    nombreCategoria[length] = '\0';
+}
+
 void Carrera::cargar() {
-    cout << "Ingrese ID de categoria: ";
-    cin >> idCategoria;
+    Categorias categoriaSeleccionada;
+    do {
+        categoriaSeleccionada.cargar();
+        if (!categoriaSeleccionada.getEstado()) {
+            cout << "La categoria ingresada no es valida. Intente nuevamente.\n";
+        }
+    } while (!categoriaSeleccionada.getEstado());
+
+    setIdCategoria(categoriaSeleccionada.getIdCategoria());
+    setNombreCategoria(categoriaSeleccionada.getNombreCat());
+    setVueltasCategoria(categoriaSeleccionada.getCantVueltas());
 
     cout << "Ingrese cantidad de participantes: ";
     cin >> cantParticipantes;
@@ -18,13 +36,21 @@ void Carrera::cargar() {
     estado = true;
 }
 
-
 void Carrera::mostrar() const {
     if (!estado) return;
 
     cout << "-----------------------------" << endl;
     cout << "ID Carrera: " << idCarrera << endl;
-    cout << "Categoria: " << idCategoria << endl;
+    cout << "Categoria (ID): " << idCategoria;
+    if (nombreCategoria[0] != '\0') {
+        cout << " - " << nombreCategoria;
+    }
+    cout << endl;
+    if (vueltasCategoria > 0) {
+        cout << "Vueltas de la categoria: " << vueltasCategoria << endl;
+    } else {
+        cout << "Vueltas de la categoria: No registrado" << endl;
+    }
     cout << "Participantes: " << cantParticipantes << endl;
     cout << "Hora de inicio: " << horaInicio << " hs" << endl;
     cout << "Fecha de creacion: ";
@@ -32,7 +58,6 @@ void Carrera::mostrar() const {
     cout << endl;
     cout << "-----------------------------" << endl;
 }
-
 
 bool Carrera::escribirDisco(int pos) {
     FILE *p;
