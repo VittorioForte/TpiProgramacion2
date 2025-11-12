@@ -1,29 +1,36 @@
-#include <cstdio>
 #include "Participantes.h"
+#include <iostream>
+#include <cstring>
+using namespace std;
 
-bool Participantes::escribirDisco(int pos) {
-    FILE *p;
-    if (pos == -1)
-        p = fopen("participantes.dat", "ab");
-    else
-        p = fopen("participantes.dat", "rb+");
-
-    if (p == NULL) return false;
-
-    if (pos != -1)
-        fseek(p, pos * sizeof(Participantes), 0);
-
-    bool ok = fwrite(this, sizeof(Participantes), 1, p);
-    fclose(p);
-    return ok;
+Participantes::Participantes() {
+    strcpy(_nombre, "-VACIO-");
+    _horaFinal = 0.0;
+    _tiempoVueltas = 0.0;
 }
 
+// Setters
+void Participantes::setNombre(string nombre) {
+    strncpy(_nombre, nombre.c_str(), 49);
+    _nombre[49] = '\0';
+}
 
-bool Participantes::leerDisco(int pos) {
-    FILE *p = fopen("participantes.dat", "rb");
-    if (p == NULL) return false;
-    fseek(p, pos * sizeof(Participantes), 0);
-    bool ok = fread(this, sizeof(Participantes), 1, p);
-    fclose(p);
-    return ok;
+void Participantes::setHoraFinal(double horaFinal) {
+    _horaFinal = horaFinal;
+}
+
+void Participantes::setTiempoVueltas(double tiempoVueltas) {
+    _tiempoVueltas = tiempoVueltas;
+}
+
+// Getters
+const char* Participantes::getNombre() const { return _nombre; }
+double Participantes::getHoraFinal() const { return _horaFinal; }
+double Participantes::getTiempoVueltas() const { return _tiempoVueltas; }
+
+// Mostrar
+void Participantes::mostrarResultado() const {
+    cout << _nombre << "\t\t | "
+         << _horaFinal << "\t | "
+         << _tiempoVueltas << endl;
 }

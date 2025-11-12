@@ -1,6 +1,5 @@
-#ifndef MENUCLIENTES_H_INCLUDED
-#define MENUCLIENTES_H_INCLUDED
+#pragma once
 
 void menuClientes();
 
-#endif
+

@@ -1,5 +1,4 @@
-#ifndef ARCHIVOCLIENTES_H_INCLUDED
-#define ARCHIVOCLIENTES_H_INCLUDED
+#pragma once
 
 #include <string>
 #include "Clientes.h"
@@ -15,8 +14,8 @@ public:
     bool Guardar(Cliente cliente, int posicion);
     Cliente Leer(int posicion);
     int BuscarPorDNI(int dni);
+    int BuscarPorID(int id);
     int CantidadRegistros();
     void LeerTodos(int cantidad, Cliente *vector);
 };
 
-#endif

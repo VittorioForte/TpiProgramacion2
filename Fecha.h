@@ -1,29 +1,27 @@
-#ifndef FECHA_H_INCLUDED
-#define FECHA_H_INCLUDED
+#pragma once
 
 #include <iostream>
-#include <ctime>
-using namespace std;
+#include <string>
 
 class Fecha {
 private:
-    int dia, mes, anio;
+    int _dia, _mes, _anio;
 
 public:
-    // Carga la fecha actual automáticamente
-    void CargarFechaActual();
+    Fecha();
+    Fecha(int dia, int mes, int anio);
 
-    // Muestra la fecha en formato dd/mm/aaaa
-    void Mostrar() const;
+    // Getters
+    int getDia() const;
+    int getMes() const;
+    int getAnio() const;
 
-    // Setters y getters
-    void setDia(int d) { dia = d; }
-    void setMes(int m) { mes = m; }
-    void setAnio(int a) { anio = a; }
+    // Setters
+    void setDia(int dia);
+    void setMes(int mes);
+    void setAnio(int anio);
 
-    int getDia() const { return dia; }
-    int getMes() const { return mes; }
-    int getAnio() const { return anio; }
+    void Cargar();
+    std::string toString() const;
 };
 
-#endif // FECHA_H_INCLUDED

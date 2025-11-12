@@ -1,27 +1,30 @@
-#ifndef CLIENTE_H_INCLUDED
-#define CLIENTE_H_INCLUDED
+#pragma once
+
+#include <cstring>
 
 class Cliente {
 private:
-    int idCliente;
-    char nombre[30];
-    char apellido[30];
-    char telefono[20];
-    int dni;
-    bool estado;
+
+    int _idCliente;
+    char _nombre[30];
+    char _apellido[30];
+    char _telefono[20];
+    int _dni;
+    bool _estado;
 
 public:
+    Cliente();
+
     void cargar();
     void mostrar() const;
 
-    int getIdCliente() const { return idCliente; }
-    int getDni() const { return dni; }
-    const char* getNombre() const { return nombre; }
-    const char* getApellido() const { return apellido; }
-    bool getEstado() const { return estado; }
+    int getIdCliente() const;
+    int getDni() const;
+    const char* getNombre() const;
+    const char* getApellido() const;
+    bool getEstado() const;
 
-    void setEstado(bool e) { estado = e; }
-    void setIdCliente(int id) { idCliente = id; }
+    void setEstado(bool estado);
+    void setIdCliente(int idCliente);
 };
 
-#endif

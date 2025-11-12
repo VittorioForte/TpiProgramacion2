@@ -1,40 +1,41 @@
-#ifndef CARRERA_H_INCLUDED
-#define CARRERA_H_INCLUDED
+#pragma once
 
+#include <iostream>
+#include <string>
 #include "Fecha.h"
+#include "Categorias.h"
+#include "Participantes.h"
 
 class Carrera {
 private:
-    bool estado;
-    int idCarrera, idCategoria, cantParticipantes;
-    double horaInicio;
-    Fecha fecha;
+    int _idCarrera;
+    Categorias _categoria;
+    Fecha _fecha;
+    char _horaInicio[6];
+    int _cantParticipantes;
+    Participantes _listaResultados[10];
+    int _idClienteResponsable;
+    bool _estado;
+    int _estadoCarrera;
 
 public:
+    Carrera();
+
     void cargar();
     void mostrar() const;
 
-    // GETTERS
-    int getIdCarrera() const { return idCarrera; }
-    int getIdCategoria() const { return idCategoria; }   // estaba mal en tu repo
-    int getCantParticipantes() const { return cantParticipantes; }
-    double getHoraInicio() const { return horaInicio; }
-    bool getEstado() const { return estado; }
-    Fecha getFecha() const { return fecha; }
+    void setIdCarrera(int idCarrera);
+    void setIdClienteResponsable(int idClienteResponsable);
+    void setEstado(bool estado);
 
-    // SETTERS
-    void setEstado(bool valor) { estado = valor; }
-    void setIdCarrera(int valor) { idCarrera = valor; }
-    void setHoraInicio(double valor) { horaInicio = valor; }
-    void setIdCategoria(int valor) { idCategoria = valor; }
-    void setCantParticipantes(int valor) { cantParticipantes = valor; }
-    void setFecha(Fecha valor) { fecha = valor; }
+    int getIdCarrera() const;
+    bool getEstado() const;
+    int getIdClienteResponsable() const;
+    int getEstadoCarrera() const;
+    Fecha getFecha() const;
+    const char* getHoraInicio() const;
 
-    // (estos métodos de archivo los puedes dejar de usar)
-    bool escribirDisco(int pos);
-    bool leerDisco(int pos);
+    Categorias getCategoria() const;
+    int getCantParticipantes() const;
 };
 
-void menuCarreras();
-
-#endif // CARRERA_H_INCLUDED

@@ -1,6 +1,5 @@
-#ifndef MENUCARRERAS_H_INCLUDED
-#define MENUCARRERAS_H_INCLUDED
+#pragma once
 
 void menuCarreras();
 
-#endif
+

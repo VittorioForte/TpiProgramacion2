@@ -50,6 +50,25 @@ int ArchivoClientes::BuscarPorDNI(int dni) {
     return -1;
 }
 
+int ArchivoClientes::BuscarPorID(int id) {
+    FILE *p = fopen(_nombreArchivo.c_str(), "rb");
+    if (p == NULL) return -1;
+
+    Cliente cliente;
+    int pos = 0;
+    while (fread(&cliente, sizeof(Cliente), 1, p)) {
+        // La única diferencia es esta línea:
+        if (cliente.getIdCliente() == id && cliente.getEstado()) {
+            fclose(p);
+            return pos;
+        }
+        pos++;
+    }
+
+    fclose(p);
+    return -1;
+}
+
 int ArchivoClientes::CantidadRegistros() {
     FILE *p = fopen(_nombreArchivo.c_str(), "rb");
     if (p == NULL) return 0;

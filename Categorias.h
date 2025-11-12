@@ -1,93 +1,33 @@
-#ifndef CATEGORIAS_H_INCLUDED
-#define CATEGORIAS_H_INCLUDED
-#include <string>
+#pragma once
 
-using namespace std;
+#include <iostream>
+#include <string>
+#include <cstring>
 
 class Categorias {
 private:
-    bool estado;
-    int idCategoria; //1 SI ES PROFESIONAL / 2 SI ES AMATEUR / 3 SI ES INFANTIL
-    int cantVueltas; //20 = PROFESIONAL / 15 = AMATEUR / 10 = INFANTIL
-    string nombreCat; //PROFESIONAL - 1 - 20 VUELTAS / AMATEUR - 2 - 15 VUELTAS / INFANTIL - 3 - 10 VUELTAS
+    bool _estado;
+    int _idCategoria;
+    int _cantVueltas;
+    char _nombreCat[30];
 
 public:
+    Categorias();
+    Categorias(int IdCategoria, int CantVueltas, bool Estado, std::string NombreCat);
 
-    Categorias() {
-        estado = false;
-        idCategoria = 0;
-        cantVueltas = 0;
-        nombreCat = "";
-    }
+    // Getters
+    bool getEstado() const;
+    int getIdCategoria() const;
+    int getCantVueltas() const;
+    const char* getNombreCat() const;
 
-    Categorias (int aIdCategoria, int aCantVueltas, bool aEstado, string aNombreCat){
-        setIdCategoria(aIdCategoria);
-        setCantVueltas(aCantVueltas);
-        setEstado(aEstado);
-        setNombreCat(aNombreCat);
-    }
+    // Setters
+    void setEstado(bool Estado);
+    void setIdCategoria(int IdCategoria);
+    void setNombreCat(std::string NombreCat);
+    void setCantVueltas(int CantVueltas);
 
-    //GETTERS
-
-    bool getEstado() const { return estado; }
-    int getIdCategoria() const { return idCategoria; }
-    int getCantVueltas() const { return cantVueltas; }
-    string getNombreCat() const { return nombreCat; }
-
-    //SETTERS
-
-    void setEstado(bool aEstado){
-        estado = aEstado;
-    }
-
-    void setIdCategoria(int aIdCategoria){
-        idCategoria = aIdCategoria;
-    }
-
-    void setNombreCat(string aNombreCat){
-        nombreCat = aNombreCat;
-
-
-        if(aNombreCat == "PROFESIONAL"){
-            cantVueltas = 20;
-            idCategoria = 1;
-            estado = true;
-        }else if(aNombreCat == "AMATEUR"){
-            cantVueltas = 15;
-            idCategoria = 2;
-            estado = true;
-        }else if(aNombreCat == "INFANTIL"){
-            cantVueltas = 10;
-            idCategoria = 3;
-            estado = true;
-        }else {
-            cout << "Categoria no Valida... " << endl;
-            cantVueltas = 0;
-            idCategoria = 0;
-            estado = false;
-        };
-    }
-
-    void setCantVueltas(int aCantVueltas){
-        cantVueltas = aCantVueltas;
-    }
-
-
-    //METODOS ADICIONALES
-    void cargar(){
-        cout << "Ingrese nombre de categoria en mayuscula (PROFESIONAL / AMATEUR / INFANTIL): ";
-        cin >> nombreCat;
-        setNombreCat(nombreCat);
-    }
-
-    void mostrar() const {
-        cout << "--------------------------------" << endl;
-        cout << "ID Categoria: " << idCategoria << endl;
-        cout << "Nombre: " << nombreCat << endl;
-        cout << "Cantidad de vueltas: " << cantVueltas << endl;
-        cout << "Estado: " << (estado ? "Activo" : "Inactivo") << endl;
-    }
+    // Métodos adicionales
+    void cargar();
+    void mostrar() const;
 };
-
-
-#endif // CATEGORIAS_H_INCLUDED

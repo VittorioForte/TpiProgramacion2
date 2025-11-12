@@ -1,45 +1,66 @@
-#include <iostream>
+#include "ArchivoCarreras.h"
 #include <cstdio>
-#include "archivoCarreras.h"
-using namespace std;
 
 ArchivoCarreras::ArchivoCarreras(std::string nombreArchivo) {
     _nombreArchivo = nombreArchivo;
 }
 
-bool ArchivoCarreras::Guardar(const Carrera &c) {
+bool ArchivoCarreras::Guardar(Carrera reg) {
     FILE *p = fopen(_nombreArchivo.c_str(), "ab");
-    if (p == NULL) {
-        cout << "[ERROR] No se pudo abrir el archivo " << _nombreArchivo << endl;
-        return false;
-    }
+    if (p == nullptr) return false;
+    bool ok = fwrite(&reg, sizeof(Carrera), 1, p);
+    fclose(p);
+    return ok;
+}
 
-    bool ok = fwrite(&c, sizeof(Carrera), 1, p);
-    if (!ok) cout << "[ERROR] No se pudo escribir en disco." << endl;
-
+bool ArchivoCarreras::Guardar(Carrera reg, int pos) {
+    FILE *p = fopen(_nombreArchivo.c_str(), "rb+");
+    if (p == nullptr) return false;
+    fseek(p, pos * sizeof(Carrera), SEEK_SET);
+    bool ok = fwrite(&reg, sizeof(Carrera), 1, p);
     fclose(p);
     return ok;
 }
 
 Carrera ArchivoCarreras::Leer(int pos) {
-    Carrera obj;
+    Carrera reg;
     FILE *p = fopen(_nombreArchivo.c_str(), "rb");
-    if (p == NULL) return obj;
-
+    if (p == nullptr) return reg;
     fseek(p, pos * sizeof(Carrera), SEEK_SET);
-    fread(&obj, sizeof(Carrera), 1, p);
-
+    fread(&reg, sizeof(Carrera), 1, p);
     fclose(p);
-    return obj;
+    return reg;
+}
+
+int ArchivoCarreras::Buscar(int id) {
+    Carrera reg;
+    FILE *p = fopen(_nombreArchivo.c_str(), "rb");
+    if (p == nullptr) return -1;
+
+    int i = 0;
+    while (fread(&reg, sizeof(Carrera), 1, p)) {
+        if (reg.getIdCarrera() == id) {
+            fclose(p);
+            return i;
+        }
+        i++;
+    }
+    fclose(p);
+    return -1;
 }
 
 int ArchivoCarreras::CantidadRegistros() {
     FILE *p = fopen(_nombreArchivo.c_str(), "rb");
-    if (p == NULL) return 0;
-
+    if (p == nullptr) return 0;
     fseek(p, 0, SEEK_END);
-    long bytes = ftell(p);
+    int bytes = ftell(p);
     fclose(p);
-
     return bytes / sizeof(Carrera);
+}
+
+void ArchivoCarreras::Leer(int cantidadRegistros, Carrera *vector) {
+    FILE *p = fopen(_nombreArchivo.c_str(), "rb");
+    if (p == nullptr) return;
+    fread(vector, sizeof(Carrera), cantidadRegistros, p);
+    fclose(p);
 }

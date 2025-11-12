@@ -73,3 +73,94 @@
 1762441611 source:c:\users\vitto\onedrive\desktop\kartodromo\tpiprogramacion2-main\tpiprogramacion2-main\fecha.cpp
 	"Fecha.h"
 
+1762891523 source:c:\users\tatu\desktop\tpiprogramacion2-gnu\archivocarreras.cpp
+	"ArchivoCarreras.h"
+	<cstdio>
+
+1762909398 c:\users\tatu\desktop\tpiprogramacion2-gnu\archivocarreras.h
+	<string>
+	"Carrera.h"
+
+1762909283 c:\users\tatu\desktop\tpiprogramacion2-gnu\carrera.h
+	<iostream>
+	<string>
+	"Fecha.h"
+	"Categorias.h"
+	"Participantes.h"
+
+1762909297 c:\users\tatu\desktop\tpiprogramacion2-gnu\fecha.h
+	<iostream>
+	<string>
+
+1762899332 source:c:\users\tatu\desktop\tpiprogramacion2-gnu\archivoclientes.cpp
+	<cstdio>
+	"ArchivoClientes.h"
+
+1762909426 c:\users\tatu\desktop\tpiprogramacion2-gnu\archivoclientes.h
+	<string>
+	"Clientes.h"
+
+1762909404 c:\users\tatu\desktop\tpiprogramacion2-gnu\clientes.h
+	<cstring>
+
+1762909193 source:c:\users\tatu\desktop\tpiprogramacion2-gnu\carrera.cpp
+	<iostream>
+	<cstring>
+	"Carrera.h"
+
+1762909134 source:c:\users\tatu\desktop\tpiprogramacion2-gnu\clientes.cpp
+	<iostream>
+	<cstring>
+	"Clientes.h"
+
+1762896129 source:c:\users\tatu\desktop\tpiprogramacion2-gnu\fecha.cpp
+	"Fecha.h"
+	<iostream>
+
+1762886563 source:c:\users\tatu\desktop\tpiprogramacion2-gnu\main.cpp
+	<iostream>
+	<cstdlib>
+	"MenuClientes.h"
+	"Clientes.h"
+	"MenuCarreras.h"
+	"Carrera.h"
+	"Participantes.h"
+
+1762909726 c:\users\tatu\desktop\tpiprogramacion2-gnu\menuclientes.h
+
+1762909727 c:\users\tatu\desktop\tpiprogramacion2-gnu\menucarreras.h
+
+1762909391 c:\users\tatu\desktop\tpiprogramacion2-gnu\participantes.h
+	<string>
+
+1762908570 source:c:\users\tatu\desktop\tpiprogramacion2-gnu\menucarreras.cpp
+	<iostream>
+	<cstdlib>
+	<ctime>
+	"MenuCarreras.h"
+	"ArchivoCarreras.h"
+	"ArchivoClientes.h"
+	"Carrera.h"
+	"Clientes.h"
+
+1762381540 source:c:\users\tatu\desktop\tpiprogramacion2-gnu\menuclientes.cpp
+	<iostream>
+	<cstdlib>
+	"Clientes.h"
+	"ArchivoClientes.h"
+
+1762909150 source:c:\users\tatu\desktop\tpiprogramacion2-gnu\participantes.cpp
+	"Participantes.h"
+	<iostream>
+	<cstring>
+
+1762909773 c:\users\tatu\desktop\tpiprogramacion2-gnu\categorias.h
+	<iostream>
+	<string>
+	<cstring>
+
+1762908115 source:c:\users\tatu\desktop\tpiprogramacion2-gnu\categorias.cpp
+	"Categorias.h"
+	<cstring>
+	<iostream>
+

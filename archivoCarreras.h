@@ -1,5 +1,4 @@
-#ifndef ARCHIVOCARRERAS_H_INCLUDED
-#define ARCHIVOCARRERAS_H_INCLUDED
+#pragma once
 
 #include <string>
 #include "Carrera.h"
@@ -10,10 +9,11 @@ private:
 
 public:
     ArchivoCarreras(std::string nombreArchivo);
-
-    bool Guardar(const Carrera &c);
-    Carrera Leer(int pos);
+    bool Guardar(Carrera);
+    bool Guardar(Carrera, int);
+    int Buscar(int);
+    Carrera Leer(int);
     int CantidadRegistros();
+    void Leer(int cantidadRegistros, Carrera *vector);
 };
 
-#endif // ARCHIVOCARRERAS_H_INCLUDED

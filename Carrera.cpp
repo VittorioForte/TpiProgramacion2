@@ -1,59 +1,90 @@
 #include <iostream>
-#include <cstdio>
+#include <cstring>
 #include "Carrera.h"
-#include "Fecha.h"
+
 using namespace std;
 
-void Carrera::cargar() {
-    cout << "Ingrese ID de categoria: ";
-    cin >> idCategoria;
-
-    cout << "Ingrese cantidad de participantes: ";
-    cin >> cantParticipantes;
-
-    cout << "Ingrese hora de inicio (ejemplo 13.30): ";
-    cin >> horaInicio;
-
-    fecha.CargarFechaActual();
-    estado = true;
+Carrera::Carrera() {
+    _idCarrera = 0;
+    strcpy(_horaInicio, "00:00");
+    _cantParticipantes = 0;
+    _idClienteResponsable = 0;
+    _estado = true;
+    _estadoCarrera = 0;
 }
 
+void Carrera::cargar() {
+    cout << "=== REGISTRAR NUEVA CARRERA ===" << endl;
+    _categoria.cargar();
+    cout << "Ingrese la fecha de la carrera:" << endl;
+    _fecha.Cargar();
+    cout << "Ingrese hora de inicio (formato hh:mm): ";
+    cin.ignore();
+    cin.getline(_horaInicio, 6);
+    cout << "Ingrese cantidad de participantes (max 10): ";
+    cin >> _cantParticipantes;
+    if (_cantParticipantes > 10) _cantParticipantes = 10;
+
+    for (int i = 0; i < _cantParticipantes; i++) {
+        string nombre;
+        cout << "Nombre Participante #" << i + 1 << ": ";
+        cin >> nombre;
+        _listaResultados[i].setNombre(nombre);
+    }
+
+    _estadoCarrera = 0;
+    _estado = true;
+
+    cout << endl << "Datos de la carrera cargados." << endl;
+}
 
 void Carrera::mostrar() const {
-    if (!estado) return;
+    cout << "==================================" << endl;
+    cout << "ID Carrera: " << _idCarrera << endl;
+    cout << "Estado Carrera: " << (_estadoCarrera == 0 ? "PENDIENTE" : "TERMINADA") << endl;
 
-    cout << "-----------------------------" << endl;
-    cout << "ID Carrera: " << idCarrera << endl;
-    cout << "Categoria: " << idCategoria << endl;
-    cout << "Participantes: " << cantParticipantes << endl;
-    cout << "Hora de inicio: " << horaInicio << " hs" << endl;
-    cout << "Fecha de creacion: ";
-    fecha.Mostrar();
-    cout << endl;
-    cout << "-----------------------------" << endl;
-}
+    cout << "Categoria: " << _categoria.getNombreCat() << endl;
+    cout << "Cantidad de vueltas: " << _categoria.getCantVueltas() << endl;
 
+    cout << "Fecha: " << _fecha.toString() << endl;
+    cout << "Hora inicio: " << _horaInicio << endl;
 
-bool Carrera::escribirDisco(int pos) {
-    FILE *p;
-    if (pos >= 0) {
-        p = fopen("carreras.dat", "rb+");
-        if (p == NULL) return false;
-        fseek(p, sizeof(Carrera) * pos, SEEK_SET);
-    } else {
-        p = fopen("carreras.dat", "ab");
-        if (p == NULL) return false;
+    if (_estadoCarrera == 0) {
+        cout << "Participantes Inscriptos (" << _cantParticipantes << "):" << endl;
+        for (int i = 0; i < _cantParticipantes; i++) {
+            cout << "- " << _listaResultados[i].getNombre() << endl;
+        }
     }
-    bool ok = fwrite(this, sizeof(Carrera), 1, p);
-    fclose(p);
-    return ok;
+    else {
+        cout << endl << "--- TABLA DE POSICIONES ---" << endl;
+        cout << "Nombre\t\t | Hora Fin\t | T. x Vuelta (min)" << endl;
+        cout << "-------------------------------------------------" << endl;
+        for (int i = 0; i < _cantParticipantes; i++) {
+            _listaResultados[i].mostrarResultado();
+        }
+    }
 }
 
-bool Carrera::leerDisco(int pos) {
-    FILE *p = fopen("carreras.dat", "rb");
-    if (p == NULL) return false;
-    fseek(p, sizeof(Carrera) * pos, SEEK_SET);
-    bool ok = fread(this, sizeof(Carrera), 1, p);
-    fclose(p);
-    return ok;
+
+// Setters
+void Carrera::setIdCarrera(int idCarrera) {
+    _idCarrera = idCarrera;
 }
+void Carrera::setIdClienteResponsable(int idClienteResponsable) {
+    _idClienteResponsable = idClienteResponsable;
+}
+void Carrera::setEstado(bool estado) {
+    _estado = estado;
+}
+
+// Getters
+int Carrera::getIdCarrera() const { return _idCarrera; }
+bool Carrera::getEstado() const { return _estado; }
+int Carrera::getIdClienteResponsable() const { return _idClienteResponsable; }
+int Carrera::getEstadoCarrera() const { return _estadoCarrera; }
+Fecha Carrera::getFecha() const { return _fecha; }
+const char* Carrera::getHoraInicio() const { return _horaInicio; }
+Categorias Carrera::getCategoria() const { return _categoria; }
+int Carrera::getCantParticipantes() const { return _cantParticipantes; }
+
+
