@@ -5,6 +5,7 @@
 #include "MenuCarreras.h"
 #include "Carrera.h"
 #include "Participantes.h"
+#include "MenuListados.h"
 
 using namespace std;
 
@@ -30,7 +31,7 @@ int main() {
             case 1: menuClientes(); break;
             case 2: menuCarreras() ; break;
             case 3: cout << "menuPagos"; break;
-            case 4: cout << "menuListados"; break;
+            case 4: menuListados(); break;
             case 0: cout << "Saliendo del sistema..."; break;
             default: cout << "Opcion invalida."; break;
         }
