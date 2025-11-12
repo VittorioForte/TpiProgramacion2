@@ -17,12 +17,15 @@ private:
     int _idClienteResponsable;
     bool _estado;
     int _estadoCarrera;
+    void ordenarResultadosPorTiempo();
 
 public:
     Carrera();
 
     void cargar();
     void mostrar() const;
+    void cargarResultados();
+    void mostrarTop3() const;
 
     void setIdCarrera(int idCarrera);
     void setIdClienteResponsable(int idClienteResponsable);
