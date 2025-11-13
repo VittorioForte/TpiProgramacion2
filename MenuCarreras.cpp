@@ -11,47 +11,6 @@
 
 using namespace std;
 
-namespace {
-    void mostarCarreras(ArchivoCarreras& arch, ArchivoClientes& archClientes) {
-        int total = arch.CantidadRegistros();
-        if (total == 0) {
-            cout << "No hay carreras registradas." << endl;
-            return;
-        }
-
-        bool hayCarrerasActivas = false;
-
-        for (int i = 0; i < total; i++) {
-            Carrera c = arch.Leer(i);
-            if (!c.getEstado()) continue;
-
-            hayCarrerasActivas = true;
-            c.mostrar();
-            cout << "----------------------------------" << endl;
-            cout << "Datos responsable del pago:" << endl;
-            int idResp = c.getIdClienteResponsable();
-            if (idResp == 0) {
-                cout << "Sin responsable asignado." << endl;
-            }
-            else {
-                int posCli = archClientes.BuscarPorID(idResp);
-                if (posCli != -1) {
-                    Cliente cli = archClientes.Leer(posCli);
-                    cli.mostrar();
-                }
-                else {
-                    cout << "Error: ID de cliente no encontrado en el archivo." << endl;
-                }
-            }
-            cout << "==================================" << endl << endl;
-        }
-
-        if (!hayCarrerasActivas) {
-            cout << "No hay carreras activas para mostrar." << endl;
-        }
-    }
-}
-
 void menuCarreras() {
     int opcion;
     ArchivoCarreras arch("carreras.dat");
@@ -147,10 +106,35 @@ void menuCarreras() {
             break;
         }
 
-        case 2:
-            mostarCarreras(arch, archClientes);
-            break;
+        case 2: {
+            int total = arch.CantidadRegistros();
+            if (total == 0) {
+                cout << "No hay carreras registradas" << endl;
+                break;
+            }
 
+            for (int i = 0; i < total; i++) {
+                Carrera c = arch.Leer(i);
+                if (!c.getEstado()) continue;
+                c.mostrar();
+                cout << "------------------------------" << endl;
+                cout << "Datos responsable del pago: " << endl;
+                int idResp = c.getIdClienteResponsable();
+                if (idResp == 0){
+                    cout << "Sin responsable asignado." << endl;
+                } else {
+                    int posCli = archClientes.BuscarPorID(idResp);
+                    if (posCli != -1) {
+                        Cliente cli = archClientes.Leer(posCli);
+                        cli.mostrar();
+                    } else {
+                        cout << "Error: ID de cliente no encontrado en el archivo" << endl;
+                    }
+                }
+                cout << "===============================" << endl<< endl;
+            }
+            break;
+        }
         case 3: {
             int id;
             cout << "Ingrese el numero de carrera a buscar: ";
