@@ -1,11 +1,14 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+#include <iomanip>
 #include "MenuCarreras.h"
 #include "ArchivoCarreras.h"
 #include "ArchivoClientes.h"
+#include "ArchivoPagos.h"
 #include "Carrera.h"
 #include "Clientes.h"
+#include "Pago.h"
 
 using namespace std;
 
@@ -13,6 +16,7 @@ void menuCarreras() {
     int opcion;
     ArchivoCarreras arch("carreras.dat");
     ArchivoClientes archClientes("clientes.dat");
+    ArchivoPagos archPagos("pagos.dat");
 
     do {
         system("cls");
@@ -83,6 +87,18 @@ void menuCarreras() {
 
             if (arch.Guardar(c)) {
                 cout << "Carrera guardada (ID: " << nuevoID << ")." << endl;
+                Pago pago;
+                pago.setIdPago(archPagos.CantidadRegistros() + 1);
+                pago.setIdCarrera(nuevoID);
+                pago.setIdCliente(idAsignado);
+                pago.setMonto(c.getMonto());
+                pago.setPagado(false);
+                pago.setEstado(true);
+                if (archPagos.Guardar(pago)) {
+                    cout << "Pago generado en estado pendiente." << endl;
+                } else {
+                    cout << "Error al generar el registro de pago." << endl;
+                }
             } else {
                 cout << "Error al guardar la carrera." << endl;
             }
@@ -100,6 +116,14 @@ void menuCarreras() {
                 Carrera c = arch.Leer(i);
                 if (!c.getEstado()) continue;
                 c.mostrar();
+                int posPago = archPagos.BuscarPorCarrera(c.getIdCarrera());
+                if (posPago != -1) {
+                    Pago pago = archPagos.Leer(posPago);
+                    cout << "Monto pendiente: $" << fixed << setprecision(2) << pago.getMonto() << endl;
+                    cout << "Situacion: " << (pago.getPagado() ? "PAGADO" : "PENDIENTE") << endl;
+                } else {
+                    cout << "No hay informacion de pago registrada." << endl;
+                }
                 cout << "----------------------------------" << endl;
                 cout << "Datos responsable del pago:" << endl;
                 int idResp = c.getIdClienteResponsable();
@@ -138,6 +162,14 @@ void menuCarreras() {
             }
 
             c.mostrar();
+            int posPago = archPagos.BuscarPorCarrera(c.getIdCarrera());
+            if (posPago != -1) {
+                Pago pago = archPagos.Leer(posPago);
+                cout << "Monto de la carrera: $" << fixed << setprecision(2) << pago.getMonto() << endl;
+                cout << "Estado del pago: " << (pago.getPagado() ? "PAGADO" : "PENDIENTE") << endl;
+            } else {
+                cout << "No hay informacion de pago registrada." << endl;
+            }
 
             break;
         }
@@ -171,6 +203,12 @@ void menuCarreras() {
 
                 if (arch.Guardar(c, pos)) {
                     cout << "Carrera eliminada correctamente." << endl;
+                    int posPago = archPagos.BuscarPorCarrera(c.getIdCarrera());
+                    if (posPago != -1) {
+                        Pago pago = archPagos.Leer(posPago);
+                        pago.setEstado(false);
+                        archPagos.Guardar(pago, posPago);
+                    }
                 } else {
                     cout << "Error al eliminar la carrera." << endl;
                 }

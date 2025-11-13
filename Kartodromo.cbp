@@ -54,10 +54,22 @@
 		<Unit filename="MenuCarreras.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
-		<Unit filename="MenuClientes.cpp" />
-		<Unit filename="MenuClientes.h" />
-		<Unit filename="Participantes.cpp" />
-		<Unit filename="Participantes.h" />
+                <Unit filename="MenuClientes.cpp" />
+                <Unit filename="MenuClientes.h" />
+                <Unit filename="MenuPagos.cpp" />
+                <Unit filename="MenuPagos.h">
+                        <Option target="&lt;{~None~}&gt;" />
+                </Unit>
+                <Unit filename="Participantes.cpp" />
+                <Unit filename="Participantes.h" />
+                <Unit filename="ArchivoPagos.cpp" />
+                <Unit filename="ArchivoPagos.h">
+                        <Option target="&lt;{~None~}&gt;" />
+                </Unit>
+                <Unit filename="Pago.cpp" />
+                <Unit filename="Pago.h">
+                        <Option target="&lt;{~None~}&gt;" />
+                </Unit>
 		<Unit filename="archivoCarreras.cpp" />
 		<Unit filename="archivoCarreras.h">
 			<Option target="&lt;{~None~}&gt;" />

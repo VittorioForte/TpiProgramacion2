@@ -1,8 +1,52 @@
 #include <iostream>
 #include <cstdlib>
+#include <iomanip>
 #include "Clientes.h"
 #include "ArchivoClientes.h"
+#include "ArchivoPagos.h"
+#include "ArchivoCarreras.h"
+#include "Pago.h"
+#include "Carrera.h"
 using namespace std;
+
+static void mostrarHistorialPagosCliente(int idCliente) {
+    ArchivoPagos archPagos("pagos.dat");
+    ArchivoCarreras archCarreras("carreras.dat");
+
+    int total = archPagos.CantidadRegistros();
+    bool encontro = false;
+
+    for (int i = 0; i < total; i++) {
+        Pago pago = archPagos.Leer(i);
+        if (!pago.getEstado()) continue;
+        if (pago.getIdCliente() != idCliente) continue;
+
+        if (!encontro) {
+            cout << endl << "Historial de pagos:" << endl;
+            encontro = true;
+        }
+
+        cout << fixed << setprecision(2);
+        cout << "- ID Pago: " << pago.getIdPago();
+        cout << " | ID Carrera: " << pago.getIdCarrera();
+        cout << " | Monto: $" << pago.getMonto();
+        cout << " | Estado: " << (pago.getPagado() ? "PAGADO" : "PENDIENTE") << endl;
+
+        int posCarrera = archCarreras.Buscar(pago.getIdCarrera());
+        if (posCarrera != -1) {
+            Carrera carrera = archCarreras.Leer(posCarrera);
+            if (carrera.getEstado()) {
+                cout << "  Categoria: " << carrera.getCategoria().getNombreCat();
+                cout << " | Fecha: " << carrera.getFecha().toString();
+                cout << " | Hora: " << carrera.getHoraInicio() << endl;
+            }
+        }
+    }
+
+    if (!encontro) {
+        cout << endl << "Historial de pagos: Sin registros." << endl;
+    }
+}
 
 void menuClientes() {
     int opcion;
@@ -38,7 +82,10 @@ void menuClientes() {
                 int cant = archClientes.CantidadRegistros();
                 for (int i = 0; i < cant; i++) {
                     Cliente c = archClientes.Leer(i);
-                    if (c.getEstado()) c.mostrar();
+                    if (c.getEstado()) {
+                        c.mostrar();
+                        mostrarHistorialPagosCliente(c.getIdCliente());
+                    }
                 }
                 break;
             }
@@ -51,6 +98,7 @@ void menuClientes() {
                 else {
                     Cliente c = archClientes.Leer(pos);
                     c.mostrar();
+                    mostrarHistorialPagosCliente(c.getIdCliente());
                 }
                 break;
             }
@@ -64,6 +112,7 @@ void menuClientes() {
                     Cliente c = archClientes.Leer(pos);
                     cout << "Datos actuales:\n";
                     c.mostrar();
+                    mostrarHistorialPagosCliente(c.getIdCliente());
                     cout << "Ingrese nuevos datos:";
                     c.cargar();
                     c.setIdCliente(pos + 1);

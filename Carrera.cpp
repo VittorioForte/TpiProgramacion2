@@ -1,5 +1,7 @@
 #include <iostream>
 #include <cstring>
+#include <iomanip>
+#include <string>
 #include "Carrera.h"
 
 using namespace std;
@@ -11,11 +13,26 @@ Carrera::Carrera() {
     _idClienteResponsable = 0;
     _estado = true;
     _estadoCarrera = 0;
+    _monto = 0.0;
+    _pagado = false;
 }
 
 void Carrera::cargar() {
     cout << "=== REGISTRAR NUEVA CARRERA ===" << endl;
     _categoria.cargar();
+    string nombreCategoria = _categoria.getNombreCat();
+    if (nombreCategoria == "PROFESIONAL") {
+        _monto = 135000.0;
+    }
+    else if (nombreCategoria == "AMATEUR") {
+        _monto = 100000.0;
+    }
+    else if (nombreCategoria == "INFANTIL") {
+        _monto = 85000.0;
+    }
+    else {
+        _monto = 0.0;
+    }
     cout << "Ingrese la fecha de la carrera:" << endl;
     _fecha.Cargar();
     cout << "Ingrese hora de inicio (formato hh:mm): ";
@@ -34,6 +51,7 @@ void Carrera::cargar() {
 
     _estadoCarrera = 0;
     _estado = true;
+    _pagado = false;
 
     cout << endl << "Datos de la carrera cargados." << endl;
 }
@@ -48,6 +66,9 @@ void Carrera::mostrar() const {
 
     cout << "Fecha: " << _fecha.toString() << endl;
     cout << "Hora inicio: " << _horaInicio << endl;
+    cout << fixed << setprecision(2);
+    cout << "Monto: $" << _monto << endl;
+    cout << "Estado de pago: " << (_pagado ? "PAGADA" : "PENDIENTE") << endl;
 
     if (_estadoCarrera == 0) {
         cout << "Participantes Inscriptos (" << _cantParticipantes << "):" << endl;
@@ -135,6 +156,12 @@ void Carrera::setIdClienteResponsable(int idClienteResponsable) {
 void Carrera::setEstado(bool estado) {
     _estado = estado;
 }
+void Carrera::setMonto(double monto) {
+    _monto = monto;
+}
+void Carrera::setPagado(bool pagado) {
+    _pagado = pagado;
+}
 
 // Getters
 int Carrera::getIdCarrera() const { return _idCarrera; }
@@ -145,6 +172,8 @@ Fecha Carrera::getFecha() const { return _fecha; }
 const char* Carrera::getHoraInicio() const { return _horaInicio; }
 Categorias Carrera::getCategoria() const { return _categoria; }
 int Carrera::getCantParticipantes() const { return _cantParticipantes; }
+double Carrera::getMonto() const { return _monto; }
+bool Carrera::getPagado() const { return _pagado; }
 
 void Carrera::ordenarResultadosPorTiempo() {
     for (int i = 0; i < _cantParticipantes - 1; i++) {
