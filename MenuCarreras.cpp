@@ -4,8 +4,10 @@
 #include "MenuCarreras.h"
 #include "ArchivoCarreras.h"
 #include "ArchivoClientes.h"
+#include "ArchivoPagos.h"
 #include "Carrera.h"
 #include "Clientes.h"
+#include "Pago.h"
 
 using namespace std;
 
@@ -83,6 +85,21 @@ void menuCarreras() {
 
             if (arch.Guardar(c)) {
                 cout << "Carrera guardada (ID: " << nuevoID << ")." << endl;
+                if (idAsignado != 0) {
+                    ArchivoPagos archivoPagos("pagos.dat");
+                    Pago pago;
+                    pago.setIdPago(archivoPagos.CantidadRegistros() + 1);
+                    pago.setIdCarrera(c.getIdCarrera());
+                    pago.setIdCliente(idAsignado);
+                    pago.setMonto(c.getMonto());
+                    pago.setPagado(false);
+                    if (archivoPagos.Guardar(pago)) {
+                        cout << "Pago pendiente generado para el responsable." << endl;
+                    }
+                    else {
+                        cout << "No se pudo generar el registro de pago." << endl;
+                    }
+                }
             } else {
                 cout << "Error al guardar la carrera." << endl;
             }
