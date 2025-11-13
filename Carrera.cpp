@@ -11,11 +11,17 @@ Carrera::Carrera() {
     _idClienteResponsable = 0;
     _estado = true;
     _estadoCarrera = 0;
+    _monto = 0;
+    _pagoRealizado = false;
 }
 
 void Carrera::cargar() {
     cout << "=== REGISTRAR NUEVA CARRERA ===" << endl;
     _categoria.cargar();
+    actualizarMontoPorCategoria();
+    if (_monto > 0) {
+        cout << "Monto de la categoria: $" << _monto << endl;
+    }
     cout << "Ingrese la fecha de la carrera:" << endl;
     _fecha.Cargar();
     cout << "Ingrese hora de inicio (formato hh:mm): ";
@@ -34,6 +40,7 @@ void Carrera::cargar() {
 
     _estadoCarrera = 0;
     _estado = true;
+    _pagoRealizado = false;
 
     cout << endl << "Datos de la carrera cargados." << endl;
 }
@@ -45,6 +52,13 @@ void Carrera::mostrar() const {
 
     cout << "Categoria: " << _categoria.getNombreCat() << endl;
     cout << "Cantidad de vueltas: " << _categoria.getCantVueltas() << endl;
+    cout << "Monto a pagar: $" << _monto << endl;
+    if (_idClienteResponsable == 0) {
+        cout << "Estado de pago: SIN RESPONSABLE" << endl;
+    }
+    else {
+        cout << "Estado de pago: " << (_pagoRealizado ? "PAGADO" : "PENDIENTE") << endl;
+    }
 
     cout << "Fecha: " << _fecha.toString() << endl;
     cout << "Hora inicio: " << _horaInicio << endl;
@@ -135,6 +149,12 @@ void Carrera::setIdClienteResponsable(int idClienteResponsable) {
 void Carrera::setEstado(bool estado) {
     _estado = estado;
 }
+void Carrera::setMonto(double monto) {
+    _monto = monto;
+}
+void Carrera::setPagoRealizado(bool pagoRealizado) {
+    _pagoRealizado = pagoRealizado;
+}
 
 // Getters
 int Carrera::getIdCarrera() const { return _idCarrera; }
@@ -145,6 +165,8 @@ Fecha Carrera::getFecha() const { return _fecha; }
 const char* Carrera::getHoraInicio() const { return _horaInicio; }
 Categorias Carrera::getCategoria() const { return _categoria; }
 int Carrera::getCantParticipantes() const { return _cantParticipantes; }
+double Carrera::getMonto() const { return _monto; }
+bool Carrera::getPagoRealizado() const { return _pagoRealizado; }
 
 void Carrera::ordenarResultadosPorTiempo() {
     for (int i = 0; i < _cantParticipantes - 1; i++) {
@@ -155,6 +177,22 @@ void Carrera::ordenarResultadosPorTiempo() {
                 _listaResultados[j] = aux;
             }
         }
+    }
+}
+
+void Carrera::actualizarMontoPorCategoria() {
+    const char* nombreCategoria = _categoria.getNombreCat();
+    if (strcmp(nombreCategoria, "PROFESIONAL") == 0) {
+        _monto = 135000;
+    }
+    else if (strcmp(nombreCategoria, "AMATEUR") == 0) {
+        _monto = 100000;
+    }
+    else if (strcmp(nombreCategoria, "INFANTIL") == 0) {
+        _monto = 85000;
+    }
+    else {
+        _monto = 0;
     }
 }
 

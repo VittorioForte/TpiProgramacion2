@@ -1,0 +1,142 @@
+# depslib dependency file v1.0
+1762910467 source:c:\users\vitto\onedrive\desktop\kartodromo\jj\kart\archivocarreras.cpp
+	"ArchivoCarreras.h"
+	<cstdio>
+
+1762910467 c:\users\vitto\onedrive\desktop\kartodromo\jj\kart\archivocarreras.h
+	<string>
+	"Carrera.h"
+
+1763040575 c:\users\vitto\onedrive\desktop\kartodromo\jj\kart\carrera.h
+	<iostream>
+	<string>
+	"Fecha.h"
+	"Categorias.h"
+	"Participantes.h"
+
+1762910467 c:\users\vitto\onedrive\desktop\kartodromo\jj\kart\fecha.h
+	<iostream>
+	<string>
+
+1762910467 c:\users\vitto\onedrive\desktop\kartodromo\jj\kart\categorias.h
+	<iostream>
+	<string>
+	<cstring>
+
+1762910467 c:\users\vitto\onedrive\desktop\kartodromo\jj\kart\participantes.h
+	<string>
+
+1762956334 source:c:\users\vitto\onedrive\desktop\kartodromo\jj\kart\archivoclientes.cpp
+	<cstdio>
+	"ArchivoClientes.h"
+
+1762910467 c:\users\vitto\onedrive\desktop\kartodromo\jj\kart\archivoclientes.h
+	<string>
+	"Clientes.h"
+
+1762910467 c:\users\vitto\onedrive\desktop\kartodromo\jj\kart\clientes.h
+	<cstring>
+
+1763040562 source:c:\users\vitto\onedrive\desktop\kartodromo\jj\kart\carrera.cpp
+	<iostream>
+	<cstring>
+	"Carrera.h"
+
+1762910467 source:c:\users\vitto\onedrive\desktop\kartodromo\jj\kart\categorias.cpp
+	"Categorias.h"
+	<cstring>
+	<iostream>
+
+1762910467 source:c:\users\vitto\onedrive\desktop\kartodromo\jj\kart\clientes.cpp
+	<iostream>
+	<cstring>
+	"Clientes.h"
+
+1762910467 source:c:\users\vitto\onedrive\desktop\kartodromo\jj\kart\contratacion.cpp
+	<iostream>
+	"contratacion.h"
+
+1762910467 c:\users\vitto\onedrive\desktop\kartodromo\jj\kart\contratacion.h
+
+1762910467 source:c:\users\vitto\onedrive\desktop\kartodromo\jj\kart\fecha.cpp
+	"Fecha.h"
+	<iostream>
+
+1763040152 source:c:\users\vitto\onedrive\desktop\kartodromo\jj\kart\main.cpp
+	<iostream>
+	<cstdlib>
+	<windows.h>
+	"MenuClientes.h"
+	"Clientes.h"
+	"MenuCarreras.h"
+	"Carrera.h"
+	"Participantes.h"
+	"MenuListados.h"
+	"MenuPagos.h"
+
+1762910467 c:\users\vitto\onedrive\desktop\kartodromo\jj\kart\menuclientes.h
+
+1762910467 c:\users\vitto\onedrive\desktop\kartodromo\jj\kart\menucarreras.h
+
+1763040507 source:c:\users\vitto\onedrive\desktop\kartodromo\jj\kart\menucarreras.cpp
+	<iostream>
+	<cstdlib>
+	<ctime>
+	"MenuCarreras.h"
+	"ArchivoCarreras.h"
+	"ArchivoClientes.h"
+	"ArchivoPagos.h"
+	"Carrera.h"
+	"Clientes.h"
+	"Pago.h"
+
+1763040589 source:c:\users\vitto\onedrive\desktop\kartodromo\jj\kart\menuclientes.cpp
+	<iostream>
+	<cstdlib>
+	"Clientes.h"
+	"ArchivoClientes.h"
+	"ArchivoPagos.h"
+	"archivoCarreras.h"
+	"Pago.h"
+	"Carrera.h"
+
+1762910467 source:c:\users\vitto\onedrive\desktop\kartodromo\jj\kart\participantes.cpp
+	"Participantes.h"
+	<iostream>
+	<cstring>
+
+1762957460 source:c:\users\vitto\onedrive\desktop\kartodromo\jj\kart\menulistados.cpp
+	<iostream>
+	<vector>
+	"MenuListados.h"
+	"ArchivoCarreras.h"
+	"Carrera.h"
+
+1762913973 c:\users\vitto\onedrive\desktop\kartodromo\jj\kart\menulistados.h
+
+1763040535 source:c:\users\vitto\onedrive\desktop\kartodromo\jj\kart\archivopagos.cpp
+	"ArchivoPagos.h"
+	<cstdio>
+
+1763040547 c:\users\vitto\onedrive\desktop\kartodromo\jj\kart\archivopagos.h
+	<string>
+	"Pago.h"
+
+1763040648 c:\users\vitto\onedrive\desktop\kartodromo\jj\kart\pago.h
+	"Fecha.h"
+
+1763040619 c:\users\vitto\onedrive\desktop\kartodromo\jj\kart\menupagos.h
+
+1763040809 source:c:\users\vitto\onedrive\desktop\kartodromo\jj\kart\menupagos.cpp
+	<iostream>
+	<cstdlib>
+	"MenuPagos.h"
+	"ArchivoPagos.h"
+	"archivoCarreras.h"
+	"ArchivoClientes.h"
+	"Carrera.h"
+	"Clientes.h"
+
+1763040637 source:c:\users\vitto\onedrive\desktop\kartodromo\jj\kart\pago.cpp
+	"Pago.h"
+
