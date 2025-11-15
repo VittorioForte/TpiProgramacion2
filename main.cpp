@@ -40,7 +40,7 @@ int main() {
             case 1: menuClientes(); break;
             case 2: menuCarreras() ; break;
             case 3: menuPagos(); break;
-            case 4: menuListados(); break;
+            case 4: cout << "prev"; break;
             case 0: cout << "Saliendo del sistema..."; break;
             default: cout << "Opcion invalida."; break;
         }

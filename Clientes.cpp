@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstring>
+#include "rlutil.h"
 #include "Clientes.h"
 using namespace std;
 
@@ -25,14 +26,13 @@ void Cliente::cargar() {
     _estado = true;
 }
 
-void Cliente::mostrar() const {
+void Cliente::mostrar(int fila) const {
     if (!_estado) return;
-    cout << "--------------------------------" << endl;
-    cout << "ID: " << _idCliente << endl;
-    cout << "Nombre: " << _nombre << endl;
-    cout << "Apellido: " << _apellido << endl;
-    cout << "Telefono: " << _telefono << endl;
-    cout << "DNI: " << _dni << endl;
+    rlutil::locate(1, fila);  cout << _idCliente;
+    rlutil::locate(8, fila);  cout << _dni;
+    rlutil::locate(20, fila); cout << _nombre;
+    rlutil::locate(40, fila); cout << _apellido;
+    rlutil::locate(60, fila); cout << _telefono;
 }
 
 // Getters

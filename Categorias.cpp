@@ -22,6 +22,7 @@ bool Categorias::getEstado() const { return _estado; }
 int Categorias::getIdCategoria() const { return _idCategoria; }
 int Categorias::getCantVueltas() const { return _cantVueltas; }
 const char* Categorias::getNombreCat() const { return _nombreCat; }
+int Categorias::getPrecio() const { return _precio; }
 
 // SETTERS
 void Categorias::setEstado(bool estado) { _estado = estado; }
@@ -36,16 +37,19 @@ void Categorias::setNombreCat(string nombreCat) {
         _cantVueltas = 20;
         _idCategoria = 1;
         _estado = true;
+        _precio = 135000;
     }
     else if (nombreCat == "AMATEUR") {
         _cantVueltas = 15;
         _idCategoria = 2;
         _estado = true;
+        _precio = 100000;
     }
     else if (nombreCat == "INFANTIL") {
         _cantVueltas = 10;
         _idCategoria = 3;
         _estado = true;
+        _precio = 85000;
     }
     else {
         _cantVueltas = 0;

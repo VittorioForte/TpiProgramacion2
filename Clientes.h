@@ -16,7 +16,7 @@ public:
     Cliente();
 
     void cargar();
-    void mostrar() const;
+    void mostrar(int fila) const;
 
     int getIdCliente() const;
     int getDni() const;

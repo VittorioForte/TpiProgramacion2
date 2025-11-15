@@ -4,14 +4,16 @@
 #include <string>
 #include "Fecha.h"
 #include "Categorias.h"
+#include "ArchivoClientes.h"
 #include "Participantes.h"
+#include "Hora.h"
 
 class Carrera {
 private:
     int _idCarrera;
     Categorias _categoria;
     Fecha _fecha;
-    char _horaInicio[6];
+    Hora _horaInicio;
     int _cantParticipantes;
     Participantes _listaResultados[10];
     int _idClienteResponsable;
@@ -26,7 +28,7 @@ public:
     Carrera();
 
     void cargar();
-    void mostrar() const;
+    void mostrar(int fila, ArchivoClientes& archClientes) const;
     void cargarResultados();
     void mostrarTop3() const;
 
@@ -41,7 +43,7 @@ public:
     int getIdClienteResponsable() const;
     int getEstadoCarrera() const;
     Fecha getFecha() const;
-    const char* getHoraInicio() const;
+    Hora getHoraInicio() const;
 
     Categorias getCategoria() const;
     int getCantParticipantes() const;

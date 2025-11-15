@@ -1,12 +1,12 @@
 #include <iostream>
 #include <cstring>
 #include "Carrera.h"
+#include "rlutil.h"
 
 using namespace std;
 
 Carrera::Carrera() {
     _idCarrera = 0;
-    strcpy(_horaInicio, "00:00");
     _cantParticipantes = 0;
     _idClienteResponsable = 0;
     _estado = true;
@@ -24,9 +24,8 @@ void Carrera::cargar() {
     }
     cout << "Ingrese la fecha de la carrera:" << endl;
     _fecha.Cargar();
-    cout << "Ingrese hora de inicio (formato hh:mm): ";
-    cin.ignore();
-    cin.getline(_horaInicio, 6);
+    cout << "Ingrese hora de inicio (formato hh:mm): " << endl;
+    _horaInicio.cargar();
     cout << "Ingrese cantidad de participantes (max 10): ";
     cin >> _cantParticipantes;
     if (_cantParticipantes > 10) _cantParticipantes = 10;
@@ -45,41 +44,56 @@ void Carrera::cargar() {
     cout << endl << "Datos de la carrera cargados." << endl;
 }
 
-void Carrera::mostrar() const {
-    cout << "==================================" << endl;
-    cout << "ID Carrera: " << _idCarrera << endl;
-    cout << "Estado Carrera: " << (_estadoCarrera == 0 ? "PENDIENTE" : "TERMINADA") << endl;
-
-    cout << "Categoria: " << _categoria.getNombreCat() << endl;
-    cout << "Cantidad de vueltas: " << _categoria.getCantVueltas() << endl;
-    cout << "Monto a pagar: $" << _monto << endl;
-    if (_idClienteResponsable == 0) {
-        cout << "Estado de pago: SIN RESPONSABLE" << endl;
+void Carrera::mostrar(int fila, ArchivoClientes& archClientes) const {
+    if (!_estado) return;
+    rlutil::locate(1, fila);  cout << _idCarrera;
+    rlutil::locate(4, fila);  cout << (_estadoCarrera == 0 ? "PENDIENTE" : "TERMINADA");
+    rlutil::locate(16, fila); cout << _categoria.getNombreCat();
+    rlutil::locate(30, fila); cout << _categoria.getCantVueltas();
+    rlutil::locate(38, fila); cout << "$" << _monto;
+    rlutil::locate(50, fila); cout << _horaInicio.toString();
+    rlutil::locate(58, fila);
+    int idResp = _idClienteResponsable;
+    if (idResp == 0) {
+        cout << "Sin cliente asignado";
+    } else {
+        int posCli = archClientes.BuscarPorID(idResp);
+        if (posCli != -1) {
+            Cliente cli = archClientes.Leer(posCli);
+            string nombreCompleto = string(cli.getNombre()) + " " + string(cli.getApellido());
+            if(nombreCompleto.length() > 20) nombreCompleto = nombreCompleto.substr(0, 20);
+            cout << nombreCompleto;
+        } else {
+            cout << "ID Error";
+        }
     }
-    else {
-        cout << "Estado de pago: " << (_pagoRealizado ? "PAGADO" : "PENDIENTE") << endl;
-    }
 
-    cout << "Fecha: " << _fecha.toString() << endl;
-    cout << "Hora inicio: " << _horaInicio << endl;
-
+    rlutil::locate(1, fila + 1);
     if (_estadoCarrera == 0) {
-        cout << "Participantes Inscriptos (" << _cantParticipantes << "):" << endl;
+        cout << "  Participantes (" << _cantParticipantes << "): ";
         for (int i = 0; i < _cantParticipantes; i++) {
-            cout << "- " << _listaResultados[i].getNombre() << endl;
+            cout << _listaResultados[i].getNombre();
+            if (i < _cantParticipantes - 1) {
+                cout << ", ";
+            }
         }
     }
     else {
-        cout << endl << "===========================" << endl;
-        cout << endl << "=== TABLA DE POSICIONES ===" << endl;
-        cout << endl << "===========================" << endl << endl;
+        cout << "  Podio: ";
+        int limite = _cantParticipantes < 3 ? _cantParticipantes : 3;
 
-        cout << "Nombre\t\t | Hora Fin\t | T. x Vuelta (min)" << endl;
-        cout << "--------------------------------------------------" << endl;
-        for (int i = 0; i < _cantParticipantes; i++) {
-            _listaResultados[i].mostrarResultado();
+        if (limite == 0) {
+            cout << "Sin participantes.";
         }
-        mostrarTop3();
+
+        for (int i = 0; i < limite; i++) {
+            const Participantes& p = _listaResultados[i];
+            cout << i + 1 << ". " << p.getNombre();
+            cout << " (" << p.getTiempoVueltas() << " min/vuelta)";
+            if (i < limite - 1) {
+                cout << ", ";
+            }
+        }
     }
 }
 
@@ -91,33 +105,44 @@ void Carrera::cargarResultados() {
 
     cout << endl << "Ingreso de tiempos finales para la carrera ID " << _idCarrera << endl;
     cout << "Categoria: " << _categoria.getNombreCat() << endl;
-    cout << "Cantidad de participantes: " << _cantParticipantes << endl;
-    cout << "Ingrese los tiempos en minutos." << endl;
+
+    cout << "Hora de Inicio: " << _horaInicio.toString() << endl;
+    int horaInicioMin = _horaInicio.getTotalMinutos();
+    int cantVueltas = _categoria.getCantVueltas();
 
     for (int i = 0; i < _cantParticipantes; i++) {
-        double tiempoFinal = 0.0;
-        double tiempoPromedioVuelta = 0.0;
+
+        Hora horaFin;
+        int horaFinMin = 0;
 
         cout << endl << "Participante: " << _listaResultados[i].getNombre() << endl;
-        cout << "Tiempo final (minutos): ";
-        cin >> tiempoFinal;
-        while (tiempoFinal <= 0) {
-            cout << "El tiempo final debe ser mayor a cero. Ingrese nuevamente: ";
-            cin >> tiempoFinal;
-        }
-        _listaResultados[i].setHoraFinal(tiempoFinal);
 
-        cout << "Tiempo promedio por vuelta (minutos, 0 para calcular automaticamente): ";
-        cin >> tiempoPromedioVuelta;
-        if (tiempoPromedioVuelta <= 0 && _categoria.getCantVueltas() > 0) {
-            tiempoPromedioVuelta = tiempoFinal / _categoria.getCantVueltas();
+        while(horaFinMin <= horaInicioMin) {
+            cout << "Hora de finalizacion:" << endl;
+            horaFin.cargar();
+            horaFinMin = horaFin.getTotalMinutos();
+
+            if (horaFinMin <= horaInicioMin) {
+                cout << "La hora de fin debe ser posterior a la de inicio." << endl;
+            }
+        }
+
+        int duracionEnMinutos = horaFinMin - horaInicioMin;
+
+        _listaResultados[i].setHoraFinal(duracionEnMinutos);
+
+        double tiempoPromedioVuelta = 0.0;
+        if (cantVueltas > 0) {
+            tiempoPromedioVuelta = (double)duracionEnMinutos / cantVueltas;
         }
         _listaResultados[i].setTiempoVueltas(tiempoPromedioVuelta);
+
+        cout << "Tiempo total registrado: " << duracionEnMinutos << " min." << endl;
+        cout << "Tiempo promedio por vuelta: " << tiempoPromedioVuelta << " min/vuelta." << endl;
     }
 
     ordenarResultadosPorTiempo();
     _estadoCarrera = 1;
-
     cout << endl << "Resultados cargados correctamente." << endl;
 }
 
@@ -138,6 +163,21 @@ void Carrera::mostrarTop3() const {
     }
 }
 
+void Carrera::ordenarResultadosPorTiempo() {
+    for (int i = 0; i < _cantParticipantes - 1; i++) {
+        for (int j = i + 1; j < _cantParticipantes; j++) {
+            if (_listaResultados[j].getTiempoVueltas() < _listaResultados[i].getTiempoVueltas()) {
+                Participantes aux = _listaResultados[i];
+                _listaResultados[i] = _listaResultados[j];
+                _listaResultados[j] = aux;
+            }
+        }
+    }
+}
+
+void Carrera::actualizarMontoPorCategoria() {
+    _monto = _categoria.getPrecio();
+}
 
 // Setters
 void Carrera::setIdCarrera(int idCarrera) {
@@ -162,38 +202,10 @@ bool Carrera::getEstado() const { return _estado; }
 int Carrera::getIdClienteResponsable() const { return _idClienteResponsable; }
 int Carrera::getEstadoCarrera() const { return _estadoCarrera; }
 Fecha Carrera::getFecha() const { return _fecha; }
-const char* Carrera::getHoraInicio() const { return _horaInicio; }
+Hora Carrera::getHoraInicio() const { return _horaInicio; }
 Categorias Carrera::getCategoria() const { return _categoria; }
 int Carrera::getCantParticipantes() const { return _cantParticipantes; }
 double Carrera::getMonto() const { return _monto; }
 bool Carrera::getPagoRealizado() const { return _pagoRealizado; }
-
-void Carrera::ordenarResultadosPorTiempo() {
-    for (int i = 0; i < _cantParticipantes - 1; i++) {
-        for (int j = i + 1; j < _cantParticipantes; j++) {
-            if (_listaResultados[j].getHoraFinal() < _listaResultados[i].getHoraFinal()) {
-                Participantes aux = _listaResultados[i];
-                _listaResultados[i] = _listaResultados[j];
-                _listaResultados[j] = aux;
-            }
-        }
-    }
-}
-
-void Carrera::actualizarMontoPorCategoria() {
-    const char* nombreCategoria = _categoria.getNombreCat();
-    if (strcmp(nombreCategoria, "PROFESIONAL") == 0) {
-        _monto = 135000;
-    }
-    else if (strcmp(nombreCategoria, "AMATEUR") == 0) {
-        _monto = 100000;
-    }
-    else if (strcmp(nombreCategoria, "INFANTIL") == 0) {
-        _monto = 85000;
-    }
-    else {
-        _monto = 0;
-    }
-}
 
 

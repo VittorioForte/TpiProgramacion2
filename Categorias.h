@@ -10,6 +10,7 @@ private:
     int _idCategoria;
     int _cantVueltas;
     char _nombreCat[30];
+    int _precio;
 
 public:
     Categorias();
@@ -20,6 +21,7 @@ public:
     int getIdCategoria() const;
     int getCantVueltas() const;
     const char* getNombreCat() const;
+    int getPrecio() const;
 
     // Setters
     void setEstado(bool Estado);

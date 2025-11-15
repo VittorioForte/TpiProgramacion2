@@ -8,8 +8,27 @@
 #include "Carrera.h"
 #include "Clientes.h"
 #include "Pago.h"
+#include "rlutil.h"
 
 using namespace std;
+
+void dibujarCuadroCarreras() {
+    rlutil::setBackgroundColor(rlutil::BLUE);
+    rlutil::setColor(rlutil::WHITE);
+
+    rlutil::locate(1, 1);
+    for(int i=0; i<80; i++) cout << " ";
+    rlutil::locate(1, 1);  cout << "ID";
+    rlutil::locate(4, 1);  cout << "ESTADO";
+    rlutil::locate(16, 1); cout << "CATEGORIA";
+    rlutil::locate(30, 1); cout << "VUELTAS";
+    rlutil::locate(38, 1); cout << "PRECIO";
+    rlutil::locate(50, 1); cout << "HORA";
+    rlutil::locate(58, 1); cout << "NOMBRE RESPONSABLE";
+
+    rlutil::setBackgroundColor(rlutil::BLACK);
+    rlutil::setColor(rlutil::WHITE);
+}
 
 void menuCarreras() {
     int opcion;
@@ -108,53 +127,42 @@ void menuCarreras() {
 
         case 2: {
             int total = arch.CantidadRegistros();
-            if (total == 0) {
-                cout << "No hay carreras registradas" << endl;
-                break;
-            }
+            if (total == 0) { cout<<"No hay carreras"; break; }
 
+            rlutil::cls();
+            dibujarCuadroCarreras();
+
+            int fila = 3;
             for (int i = 0; i < total; i++) {
                 Carrera c = arch.Leer(i);
-                if (!c.getEstado()) continue;
-                c.mostrar();
-                cout << "------------------------------" << endl;
-                cout << "Datos responsable del pago: " << endl;
-                int idResp = c.getIdClienteResponsable();
-                if (idResp == 0){
-                    cout << "Sin responsable asignado." << endl;
-                } else {
-                    int posCli = archClientes.BuscarPorID(idResp);
-                    if (posCli != -1) {
-                        Cliente cli = archClientes.Leer(posCli);
-                        cli.mostrar();
-                    } else {
-                        cout << "Error: ID de cliente no encontrado en el archivo" << endl;
-                    }
+                if (c.getEstado()) {
+                    c.mostrar(fila, archClientes);
+                    rlutil::locate(1, fila + 2);
+                    for(int k=0; k<80; k++) cout << "-";
+                    fila += 3;
                 }
-                cout << "===============================" << endl<< endl;
             }
+            rlutil::locate(1, fila + 2);
             break;
         }
         case 3: {
             int id;
             cout << "Ingrese el numero de carrera a buscar: ";
             cin >> id;
-
+            rlutil::cls();
             int pos = arch.Buscar(id);
             if (pos == -1) {
                 cout << "No existe una carrera con ese ID." << endl;
-                break;
+            } else {
+                Carrera c = arch.Leer(pos);
+                if (!c.getEstado()) {
+                    cout << "No existe una carrera con ese ID o fue eliminada." << endl;
+                } else {
+                    dibujarCuadroCarreras();
+                    c.mostrar(3, archClientes);
+                    rlutil::locate(1, 6);
+                }
             }
-
-            Carrera c = arch.Leer(pos);
-
-            if (!c.getEstado()) {
-                cout << "No existe una carrera con ese ID o fue eliminada." << endl;
-                break;
-            }
-
-            c.mostrar();
-
             break;
         }
 
@@ -176,8 +184,8 @@ void menuCarreras() {
                 break;
             }
 
-            cout << "Carrera encontrada:" << endl;
-            c.mostrar();
+            dibujarCuadroCarreras();
+            c.mostrar(3, archClientes);
             cout << endl << "Desea eliminarla? (1=SI / 0=NO): ";
             int opc;
             cin >> opc;
@@ -192,6 +200,35 @@ void menuCarreras() {
                 }
             } else {
                 cout << "Operacion cancelada." << endl;
+            }
+            break;
+        }
+        case 5: {
+            int id;
+            cout << "Ingrese el ID de la carrera a finalizar: ";
+            cin >> id;
+            rlutil::cls();
+
+            int pos = arch.Buscar(id);
+            if (pos == -1) {
+                cout << "Carrera no encontrada." << endl;
+            } else {
+                Carrera c = arch.Leer(pos);
+                if (!c.getEstado()) {
+                    cout << "No se puede finalizar una carrera eliminada." << endl;
+                } else if (c.getEstadoCarrera() == 1) {
+                    cout << "Esta carrera ya fue finalizada anteriormente." << endl;
+                    dibujarCuadroCarreras();
+                    c.mostrar(3, archClientes);
+                } else {
+                    c.cargarResultados();
+
+                    if (arch.Guardar(c, pos)) {
+                        cout << "Carrera finalizada y tiempos guardados." << endl;
+                    } else {
+                        cout << "Error al guardar los cambios." << endl;
+                    }
+                }
             }
             break;
         }

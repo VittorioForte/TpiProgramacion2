@@ -5,6 +5,7 @@
 #include "ArchivoPagos.h"
 #include "archivoCarreras.h"
 #include "Pago.h"
+#include "rlutil.h"
 #include "Carrera.h"
 using namespace std;
 
@@ -47,6 +48,23 @@ namespace {
     }
 }
 
+void dibujarCuadroClientes() {
+    rlutil::setBackgroundColor(rlutil::BLUE);
+    rlutil::setColor(rlutil::WHITE);
+
+    rlutil::locate(1, 1);
+    for(int i=0; i<80; i++) cout << " ";
+
+    rlutil::locate(1, 1);  cout << "ID";
+    rlutil::locate(8, 1);  cout << "DNI";
+    rlutil::locate(20, 1); cout << "NOMBRE";
+    rlutil::locate(40, 1); cout << "APELLIDO";
+    rlutil::locate(60, 1); cout << "TELEFONO";
+
+    rlutil::setBackgroundColor(rlutil::BLACK);
+    rlutil::setColor(rlutil::WHITE);
+}
+
 void menuClientes() {
     int opcion;
     ArchivoClientes archClientes("clientes.dat");
@@ -79,25 +97,38 @@ void menuClientes() {
             }
             case 2: {
                 int cant = archClientes.CantidadRegistros();
+
+                dibujarCuadroClientes();
+
+                int fila = 3;
                 for (int i = 0; i < cant; i++) {
                     Cliente c = archClientes.Leer(i);
                     if (c.getEstado()) {
-                        c.mostrar();
-                        mostrarHistorialPagosCliente(c);
+                        c.mostrar(fila);
+                        fila++;
                     }
                 }
+                rlutil::locate(1, fila + 2);
                 break;
             }
             case 3: {
                 int dni;
                 cout << "Ingrese DNI a buscar: ";
                 cin >> dni;
+                rlutil::cls();
+
                 int pos = archClientes.BuscarPorDNI(dni);
-                if (pos == -1) cout << "Cliente no encontrado.";
+                if (pos == -1) {
+                    cout << "Cliente no encontrado." << endl;
+                }
                 else {
+                    dibujarCuadroClientes();
+
                     Cliente c = archClientes.Leer(pos);
-                    c.mostrar();
-                    mostrarHistorialPagosCliente(c);
+                    c.mostrar(3);
+
+                    rlutil::locate(1, 5);
+                    cout << "Cliente encontrado." << endl;
                 }
                 break;
             }
@@ -105,20 +136,26 @@ void menuClientes() {
                 int dni;
                 cout << "Ingrese DNI del cliente a modificar: ";
                 cin >> dni;
+                rlutil::cls();
+
                 int pos = archClientes.BuscarPorDNI(dni);
-                if (pos == -1) cout << "Cliente no encontrado.";
-                else {
+                if (pos == -1) {
+                    cout << "Cliente no encontrado." << endl;
+                } else {
                     Cliente c = archClientes.Leer(pos);
-                    cout << "Datos actuales:\n";
-                    c.mostrar();
-                    mostrarHistorialPagosCliente(c);
-                    cout << "Ingrese nuevos datos:";
+
+                    cout << "DATOS ACTUALES:" << endl;
+                    dibujarCuadroClientes();
+                    c.mostrar(3);
+
+                    cout << endl << endl << "INGRESE NUEVOS DATOS:" << endl;
                     c.cargar();
-                    c.setIdCliente(pos + 1);
-                    if (archClientes.Guardar(c, pos))
-                        cout << "Cliente modificado correctamente.";
-                    else
-                        cout << "Error al modificar cliente.";
+
+                    if (archClientes.Guardar(c, pos)) {
+                        cout << "Cliente modificado." << endl;
+                    } else {
+                        cout << "Error al modificar." << endl;
+                    }
                 }
                 break;
             }
