@@ -81,7 +81,7 @@
 	<string>
 	"Carrera.h"
 
-1763230681 c:\users\tatu\desktop\tpiprogramacion2-gnu\carrera.h
+1763349395 c:\users\tatu\desktop\tpiprogramacion2-gnu\carrera.h
 	<iostream>
 	<string>
 	"Fecha.h"
@@ -105,7 +105,7 @@
 1763224810 c:\users\tatu\desktop\tpiprogramacion2-gnu\clientes.h
 	<cstring>
 
-1763232067 source:c:\users\tatu\desktop\tpiprogramacion2-gnu\carrera.cpp
+1763349423 source:c:\users\tatu\desktop\tpiprogramacion2-gnu\carrera.cpp
 	<iostream>
 	<cstring>
 	"Carrera.h"
@@ -140,7 +140,7 @@
 1763232044 c:\users\tatu\desktop\tpiprogramacion2-gnu\participantes.h
 	<string>
 
-1763229482 source:c:\users\tatu\desktop\tpiprogramacion2-gnu\menucarreras.cpp
+1763349348 source:c:\users\tatu\desktop\tpiprogramacion2-gnu\menucarreras.cpp
 	<iostream>
 	<cstdlib>
 	<ctime>
@@ -153,7 +153,7 @@
 	"Pago.h"
 	"rlutil.h"
 
-1763225163 source:c:\users\tatu\desktop\tpiprogramacion2-gnu\menuclientes.cpp
+1763348746 source:c:\users\tatu\desktop\tpiprogramacion2-gnu\menuclientes.cpp
 	<iostream>
 	<cstdlib>
 	"Clientes.h"
@@ -187,8 +187,10 @@
 	<string>
 	"Pago.h"
 
-1763071526 c:\users\tatu\desktop\tpiprogramacion2-gnu\pago.h
+1763348588 c:\users\tatu\desktop\tpiprogramacion2-gnu\pago.h
 	"Fecha.h"
+	"ArchivoCarreras.h"
+	"ArchivoClientes.h"
 
 1763229331 source:c:\users\tatu\desktop\tpiprogramacion2-gnu\menulistados.cpp
 	<vector>
@@ -196,18 +198,27 @@
 	"ArchivoCarreras.h"
 	"Carrera.h"
 
-1763071526 source:c:\users\tatu\desktop\tpiprogramacion2-gnu\menupagos.cpp
+1763349153 source:c:\users\tatu\desktop\tpiprogramacion2-gnu\menupagos.cpp
 	<iostream>
 	<cstdlib>
+	<string>
+	<cstring>
 	"MenuPagos.h"
 	"ArchivoPagos.h"
-	"archivoCarreras.h"
+	"ArchivoCarreras.h"
 	"ArchivoClientes.h"
 	"Carrera.h"
 	"Clientes.h"
-
-1763071526 source:c:\users\tatu\desktop\tpiprogramacion2-gnu\pago.cpp
 	"Pago.h"
+	"rlutil.h"
+
+1763348867 source:c:\users\tatu\desktop\tpiprogramacion2-gnu\pago.cpp
+	"Pago.h"
+	"rlutil.h"
+	"Carrera.h"
+	"Clientes.h"
+	<iostream>
+	<string>
 
 1763071526 source:c:\users\tatu\desktop\tpiprogramacion2-gnu\archivopagos.cpp
 	"ArchivoPagos.h"

@@ -11,17 +11,11 @@ Carrera::Carrera() {
     _idClienteResponsable = 0;
     _estado = true;
     _estadoCarrera = 0;
-    _monto = 0;
-    _pagoRealizado = false;
 }
 
 void Carrera::cargar() {
     cout << "=== REGISTRAR NUEVA CARRERA ===" << endl;
     _categoria.cargar();
-    actualizarMontoPorCategoria();
-    if (_monto > 0) {
-        cout << "Monto de la categoria: $" << _monto << endl;
-    }
     cout << "Ingrese la fecha de la carrera:" << endl;
     _fecha.Cargar();
     cout << "Ingrese hora de inicio (formato hh:mm): " << endl;
@@ -39,7 +33,6 @@ void Carrera::cargar() {
 
     _estadoCarrera = 0;
     _estado = true;
-    _pagoRealizado = false;
 
     cout << endl << "Datos de la carrera cargados." << endl;
 }
@@ -50,9 +43,8 @@ void Carrera::mostrar(int fila, ArchivoClientes& archClientes) const {
     rlutil::locate(4, fila);  cout << (_estadoCarrera == 0 ? "PENDIENTE" : "TERMINADA");
     rlutil::locate(16, fila); cout << _categoria.getNombreCat();
     rlutil::locate(30, fila); cout << _categoria.getCantVueltas();
-    rlutil::locate(38, fila); cout << "$" << _monto;
-    rlutil::locate(50, fila); cout << _horaInicio.toString();
-    rlutil::locate(58, fila);
+    rlutil::locate(38, fila); cout << _horaInicio.toString();
+    rlutil::locate(50, fila);
     int idResp = _idClienteResponsable;
     if (idResp == 0) {
         cout << "Sin cliente asignado";
@@ -175,9 +167,6 @@ void Carrera::ordenarResultadosPorTiempo() {
     }
 }
 
-void Carrera::actualizarMontoPorCategoria() {
-    _monto = _categoria.getPrecio();
-}
 
 // Setters
 void Carrera::setIdCarrera(int idCarrera) {
@@ -189,12 +178,7 @@ void Carrera::setIdClienteResponsable(int idClienteResponsable) {
 void Carrera::setEstado(bool estado) {
     _estado = estado;
 }
-void Carrera::setMonto(double monto) {
-    _monto = monto;
-}
-void Carrera::setPagoRealizado(bool pagoRealizado) {
-    _pagoRealizado = pagoRealizado;
-}
+
 
 // Getters
 int Carrera::getIdCarrera() const { return _idCarrera; }
@@ -205,7 +189,5 @@ Fecha Carrera::getFecha() const { return _fecha; }
 Hora Carrera::getHoraInicio() const { return _horaInicio; }
 Categorias Carrera::getCategoria() const { return _categoria; }
 int Carrera::getCantParticipantes() const { return _cantParticipantes; }
-double Carrera::getMonto() const { return _monto; }
-bool Carrera::getPagoRealizado() const { return _pagoRealizado; }
 
 

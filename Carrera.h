@@ -19,10 +19,7 @@ private:
     int _idClienteResponsable;
     bool _estado;
     int _estadoCarrera;
-    double _monto;
-    bool _pagoRealizado;
     void ordenarResultadosPorTiempo();
-    void actualizarMontoPorCategoria();
 
 public:
     Carrera();
@@ -35,8 +32,6 @@ public:
     void setIdCarrera(int idCarrera);
     void setIdClienteResponsable(int idClienteResponsable);
     void setEstado(bool estado);
-    void setMonto(double monto);
-    void setPagoRealizado(bool pagoRealizado);
 
     int getIdCarrera() const;
     bool getEstado() const;
@@ -47,7 +42,5 @@ public:
 
     Categorias getCategoria() const;
     int getCantParticipantes() const;
-    double getMonto() const;
-    bool getPagoRealizado() const;
 };
 

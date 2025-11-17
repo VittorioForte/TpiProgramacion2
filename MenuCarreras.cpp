@@ -22,9 +22,8 @@ void dibujarCuadroCarreras() {
     rlutil::locate(4, 1);  cout << "ESTADO";
     rlutil::locate(16, 1); cout << "CATEGORIA";
     rlutil::locate(30, 1); cout << "VUELTAS";
-    rlutil::locate(38, 1); cout << "PRECIO";
-    rlutil::locate(50, 1); cout << "HORA";
-    rlutil::locate(58, 1); cout << "NOMBRE RESPONSABLE";
+    rlutil::locate(38, 1); cout << "HORA";
+    rlutil::locate(50, 1); cout << "NOMBRE RESPONSABLE";
 
     rlutil::setBackgroundColor(rlutil::BLACK);
     rlutil::setColor(rlutil::WHITE);
@@ -102,23 +101,9 @@ void menuCarreras() {
             int nuevoID = arch.CantidadRegistros() + 1;
             c.setIdCarrera(nuevoID);
 
+
             if (arch.Guardar(c)) {
                 cout << "Carrera guardada (ID: " << nuevoID << ")." << endl;
-                if (idAsignado != 0) {
-                    ArchivoPagos archivoPagos("pagos.dat");
-                    Pago pago;
-                    pago.setIdPago(archivoPagos.CantidadRegistros() + 1);
-                    pago.setIdCarrera(c.getIdCarrera());
-                    pago.setIdCliente(idAsignado);
-                    pago.setMonto(c.getMonto());
-                    pago.setPagado(false);
-                    if (archivoPagos.Guardar(pago)) {
-                        cout << "Pago pendiente generado para el responsable." << endl;
-                    }
-                    else {
-                        cout << "No se pudo generar el registro de pago." << endl;
-                    }
-                }
             } else {
                 cout << "Error al guardar la carrera." << endl;
             }

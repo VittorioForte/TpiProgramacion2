@@ -1,167 +1,167 @@
 #include <iostream>
 #include <cstdlib>
+#include <string>
+#include <cstring>
 #include "MenuPagos.h"
 #include "ArchivoPagos.h"
-#include "archivoCarreras.h"
+#include "ArchivoCarreras.h"
 #include "ArchivoClientes.h"
 #include "Carrera.h"
 #include "Clientes.h"
+#include "Pago.h"
+#include "rlutil.h"
 
 using namespace std;
 
-namespace {
-    void mostrarDetallePago(const Pago& pago, ArchivoCarreras& archivoCarreras, ArchivoClientes& archivoClientes) {
-        cout << "----------------------------------" << endl;
-        cout << "ID Pago: " << pago.getIdPago() << endl;
-        cout << "ID Carrera: " << pago.getIdCarrera() << endl;
-        cout << "Monto: $" << pago.getMonto() << endl;
-        cout << "Estado: " << (pago.getPagado() ? "PAGADO" : "PENDIENTE") << endl;
+void dibujarCuadroPagos() {
+    rlutil::setBackgroundColor(rlutil::BLUE);
+    rlutil::setColor(rlutil::WHITE);
 
-        int posCarrera = archivoCarreras.Buscar(pago.getIdCarrera());
-        if (posCarrera != -1) {
-            Carrera carrera = archivoCarreras.Leer(posCarrera);
-            cout << "Categoria: " << carrera.getCategoria().getNombreCat() << endl;
-            cout << "Fecha de carrera: " << carrera.getFecha().toString() << endl;
-        }
-        else {
-            cout << "Categoria: No disponible" << endl;
-        }
+    rlutil::locate(1, 1);
+    for(int i=0; i<80; i++) cout << " ";
 
-        int posCliente = archivoClientes.BuscarPorID(pago.getIdCliente());
-        if (posCliente != -1) {
-            Cliente cliente = archivoClientes.Leer(posCliente);
-            cout << "Cliente responsable: " << cliente.getNombre() << " " << cliente.getApellido() << endl;
-        }
-        else {
-            cout << "Cliente responsable: No disponible" << endl;
-        }
+    rlutil::locate(1, 1);  cout << "ID";
+    rlutil::locate(8, 1);  cout << "MONTO";
+    rlutil::locate(20, 1); cout << "FECHA PAGO";
+    rlutil::locate(35, 1); cout << "CARRERA";
+    rlutil::locate(55, 1); cout << "CLIENTE";
 
-        if (pago.getPagado()) {
-            Fecha fechaPago = pago.getFechaPago();
-            if (fechaPago.getDia() != 0 || fechaPago.getMes() != 0 || fechaPago.getAnio() != 0) {
-                cout << "Fecha de pago: " << fechaPago.toString() << endl;
-            }
-        }
-    }
+    rlutil::setBackgroundColor(rlutil::BLACK);
+    rlutil::setColor(rlutil::WHITE);
 }
 
 void menuPagos() {
-    ArchivoPagos archivoPagos("pagos.dat");
-    ArchivoCarreras archivoCarreras("carreras.dat");
-    ArchivoClientes archivoClientes("clientes.dat");
     int opcion;
+    ArchivoPagos archPagos("pagos.dat");
+    ArchivoCarreras archCarreras("carreras.dat");
+    ArchivoClientes archClientes("clientes.dat");
 
     do {
         system("cls");
         cout << "======== MENU DE PAGOS ========" << endl;
-        cout << "1) Pagos pendientes" << endl;
-        cout << "2) Registrar pago" << endl;
-        cout << "3) Historial por cliente" << endl;
+        cout << "1) Lista de pagos" << endl;
+        cout << "2) Historial por cliente" << endl;
+        cout << "3) Filtro por categoria" << endl;
         cout << "0) Volver" << endl;
+        cout << "===============================" << endl;
         cout << "Seleccione una opcion: ";
         cin >> opcion;
         system("cls");
 
         switch (opcion) {
+
         case 1: {
-            int total = archivoPagos.CantidadRegistros();
-            bool hayPendientes = false;
-            for (int i = 0; i < total; i++) {
-                Pago pago = archivoPagos.Leer(i);
-                if (!pago.getPagado()) {
-                    if (!hayPendientes) {
-                        cout << "=== PAGOS PENDIENTES ===" << endl;
+            int total = archPagos.CantidadRegistros();
+            if (total == 0) {
+                cout << "No hay pagos registrados." << endl;
+            } else {
+                dibujarCuadroPagos();
+                int fila = 3;
+                for (int i = 0; i < total; i++) {
+                    Pago p = archPagos.Leer(i);
+                    if (p.getEstado()) {
+                        p.mostrar(fila, archCarreras, archClientes);
+                        fila++;
                     }
-                    hayPendientes = true;
-                    mostrarDetallePago(pago, archivoCarreras, archivoClientes);
                 }
+                rlutil::locate(1, fila + 2);
             }
-            if (!hayPendientes) {
-                cout << "No hay pagos pendientes." << endl;
-            }
+
+            cout << endl;
+            system("pause");
             break;
         }
+
         case 2: {
-            int idCarrera;
-            cout << "Ingrese ID de la carrera a registrar pago: ";
-            cin >> idCarrera;
+            int dniBuscado;
+            cout << "Ingrese DNI del cliente a buscar: ";
+            cin >> dniBuscado;
+            rlutil::cls();
 
-            int posPago = archivoPagos.BuscarPorCarrera(idCarrera);
-            if (posPago == -1) {
-                cout << "No se encontro un pago asociado a la carrera." << endl;
-                break;
-            }
-
-            Pago pago = archivoPagos.Leer(posPago);
-            if (pago.getPagado()) {
-                cout << "La carrera ya se encuentra abonada." << endl;
-                break;
-            }
-
-            mostrarDetallePago(pago, archivoCarreras, archivoClientes);
-
-            int confirmar;
-            cout << endl << "Confirmar registro del pago? (1=SI / 0=NO): ";
-            cin >> confirmar;
-            if (confirmar != 1) {
-                cout << "Operacion cancelada." << endl;
-                break;
-            }
-
-            cout << "Ingrese la fecha del pago:" << endl;
-            Fecha fechaPago;
-            fechaPago.Cargar();
-
-            pago.setPagado(true);
-            pago.setFechaPago(fechaPago);
-
-            if (archivoPagos.Guardar(pago, posPago)) {
-                int posCarrera = archivoCarreras.Buscar(idCarrera);
-                if (posCarrera != -1) {
-                    Carrera carrera = archivoCarreras.Leer(posCarrera);
-                    carrera.setPagoRealizado(true);
-                    archivoCarreras.Guardar(carrera, posCarrera);
-                }
-                cout << "Pago registrado correctamente." << endl;
+            int posCli = archClientes.BuscarPorDNI(dniBuscado);
+            if (posCli == -1) {
+                cout << "Cliente no encontrado con ese DNI." << endl;
             }
             else {
-                cout << "Error al registrar el pago." << endl;
+                Cliente cli = archClientes.Leer(posCli);
+                int idClienteEncontrado = cli.getIdCliente();
+
+                cout << "Historial de Pagos de: " << cli.getNombre() << " " << cli.getApellido() << endl;
+                dibujarCuadroPagos();
+
+                int total = archPagos.CantidadRegistros();
+                int fila = 4;
+                bool encontroPagos = false;
+
+                for (int i = 0; i < total; i++) {
+                    Pago p = archPagos.Leer(i);
+                    if (p.getEstado() && p.getIdCliente() == idClienteEncontrado) {
+                        p.mostrar(fila, archCarreras, archClientes);
+                        fila++;
+                        encontroPagos = true;
+                    }
+                }
+
+                if (!encontroPagos) {
+                    rlutil::locate(1, 4);
+                    cout << "Este cliente no tiene pagos registrados." << endl;
+                }
+                rlutil::locate(1, fila + 2);
             }
+
+            cout << endl;
+            system("pause");
             break;
         }
-        case 3: {
-            int idCliente;
-            cout << "Ingrese ID de cliente: ";
-            cin >> idCliente;
 
-            int total = archivoPagos.CantidadRegistros();
-            bool encontrado = false;
+        case 3: {
+            string catBuscada;
+            cout << "Ingrese Categoria (PROFESIONAL / AMATEUR / INFANTIL): ";
+            cin >> catBuscada;
+            rlutil::cls();
+
+            dibujarCuadroPagos();
+            int total = archPagos.CantidadRegistros();
+            int fila = 3;
+            bool encontroPagos = false;
+
             for (int i = 0; i < total; i++) {
-                Pago pago = archivoPagos.Leer(i);
-                if (pago.getIdCliente() == idCliente) {
-                    if (!encontrado) {
-                        cout << "=== HISTORIAL DE PAGOS ===" << endl;
+                Pago p = archPagos.Leer(i);
+                if (p.getEstado()) {
+                    int posCarrera = archCarreras.Buscar(p.getIdCarrera());
+                    if (posCarrera != -1) {
+                        Carrera c = archCarreras.Leer(posCarrera);
+                        string catActual = c.getCategoria().getNombreCat();
+
+                        if (catActual == catBuscada) {
+                            p.mostrar(fila, archCarreras, archClientes);
+                            fila++;
+                            encontroPagos = true;
+                        }
                     }
-                    encontrado = true;
-                    mostrarDetallePago(pago, archivoCarreras, archivoClientes);
                 }
             }
-            if (!encontrado) {
-                cout << "El cliente no registra pagos." << endl;
+
+            if (!encontroPagos) {
+                rlutil::locate(1, 3);
+                cout << "No hay pagos registrados para la categoria " << catBuscada << "." << endl;
             }
+            rlutil::locate(1, fila + 2);
+
+            cout << endl;
+            system("pause");
             break;
         }
+
         case 0:
             cout << "Volviendo al menu principal..." << endl;
             break;
+
         default:
             cout << "Opcion invalida." << endl;
-            break;
-        }
-
-        if (opcion != 0) {
             cout << endl;
             system("pause");
+            break;
         }
 
     } while (opcion != 0);

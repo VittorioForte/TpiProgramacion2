@@ -32,13 +32,6 @@ namespace {
                     cout << " | Categoria: No disponible";
                 }
                 cout << " | Monto: $" << pago.getMonto();
-                cout << " | Estado: " << (pago.getPagado() ? "PAGADO" : "PENDIENTE");
-                if (pago.getPagado()) {
-                    Fecha fechaPago = pago.getFechaPago();
-                    if (fechaPago.getDia() != 0 || fechaPago.getMes() != 0 || fechaPago.getAnio() != 0) {
-                        cout << " | Fecha de pago: " << fechaPago.toString();
-                    }
-                }
                 cout << endl;
             }
         }
