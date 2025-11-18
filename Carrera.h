@@ -42,5 +42,6 @@ public:
 
     Categorias getCategoria() const;
     int getCantParticipantes() const;
+    const Participantes& getParticipante(int index) const;
 };
 

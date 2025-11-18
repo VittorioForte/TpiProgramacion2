@@ -32,24 +32,26 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename=".gitignore" />
+		<Unit filename="ArchivoClientes.cpp" />
+		<Unit filename="ArchivoClientes.h" />
 		<Unit filename="ArchivoPagos.cpp" />
 		<Unit filename="ArchivoPagos.h" />
 		<Unit filename="Carrera.cpp" />
 		<Unit filename="Carrera.h" />
 		<Unit filename="Categorias.cpp" />
-		<Unit filename="Categorias.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
+		<Unit filename="Categorias.h" />
 		<Unit filename="Clientes.cpp" />
 		<Unit filename="Clientes.h" />
 		<Unit filename="Fecha.cpp" />
 		<Unit filename="Fecha.h" />
 		<Unit filename="Hora.cpp" />
 		<Unit filename="Hora.h" />
+		<Unit filename="Kartodromo.cbp" />
+		<Unit filename="Kartodromo.depend" />
+		<Unit filename="Kartodromo.layout" />
 		<Unit filename="MenuCarreras.cpp" />
-		<Unit filename="MenuCarreras.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
+		<Unit filename="MenuCarreras.h" />
 		<Unit filename="MenuClientes.cpp" />
 		<Unit filename="MenuClientes.h" />
 		<Unit filename="MenuListados.cpp" />
@@ -61,13 +63,14 @@
 		<Unit filename="Participantes.cpp" />
 		<Unit filename="Participantes.h" />
 		<Unit filename="archivoCarreras.cpp" />
-		<Unit filename="archivoCarreras.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
+		<Unit filename="archivoCarreras.h" />
 		<Unit filename="archivoClientes.cpp" />
 		<Unit filename="archivoClientes.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
+		<Unit filename="carreras.dat" />
+		<Unit filename="clientes.dat" />
+		<Unit filename="git" />
 		<Unit filename="main.cpp" />
 		<Unit filename="rlutil.h" />
 		<Extensions />

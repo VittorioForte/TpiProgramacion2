@@ -246,3 +246,181 @@
 	<iostream>
 	<string>
 
+1763403500 source:c:\users\vitto\onedrive\desktop\facultad\tpiprogramacion2-main\archivocarreras.cpp
+	"ArchivoCarreras.h"
+	<cstdio>
+
+1763403500 c:\users\vitto\onedrive\desktop\facultad\tpiprogramacion2-main\archivocarreras.h
+	<string>
+	"Carrera.h"
+
+1763412326 c:\users\vitto\onedrive\desktop\facultad\tpiprogramacion2-main\carrera.h
+	<iostream>
+	<string>
+	"Fecha.h"
+	"Categorias.h"
+	"ArchivoClientes.h"
+	"Participantes.h"
+	"Hora.h"
+
+1763403500 c:\users\vitto\onedrive\desktop\facultad\tpiprogramacion2-main\fecha.h
+	<iostream>
+	<string>
+
+1763403500 c:\users\vitto\onedrive\desktop\facultad\tpiprogramacion2-main\categorias.h
+	<iostream>
+	<string>
+	<cstring>
+
+1763403500 c:\users\vitto\onedrive\desktop\facultad\tpiprogramacion2-main\archivoclientes.h
+	<string>
+	"Clientes.h"
+
+1763403500 c:\users\vitto\onedrive\desktop\facultad\tpiprogramacion2-main\clientes.h
+	<cstring>
+
+1763403500 c:\users\vitto\onedrive\desktop\facultad\tpiprogramacion2-main\participantes.h
+	<string>
+
+1763403500 c:\users\vitto\onedrive\desktop\facultad\tpiprogramacion2-main\hora.h
+	<string>
+
+1763403500 source:c:\users\vitto\onedrive\desktop\facultad\tpiprogramacion2-main\archivoclientes.cpp
+	<cstdio>
+	"ArchivoClientes.h"
+
+1763403500 source:c:\users\vitto\onedrive\desktop\facultad\tpiprogramacion2-main\archivopagos.cpp
+	"ArchivoPagos.h"
+	<cstdio>
+
+1763403500 c:\users\vitto\onedrive\desktop\facultad\tpiprogramacion2-main\archivopagos.h
+	<string>
+	"Pago.h"
+
+1763403500 c:\users\vitto\onedrive\desktop\facultad\tpiprogramacion2-main\pago.h
+	"Fecha.h"
+	"ArchivoCarreras.h"
+	"ArchivoClientes.h"
+
+1763412423 source:c:\users\vitto\onedrive\desktop\facultad\tpiprogramacion2-main\carrera.cpp
+	<iostream>
+	<cstring>
+	"Carrera.h"
+	"rlutil.h"
+
+1763403500 c:\users\vitto\onedrive\desktop\facultad\tpiprogramacion2-main\rlutil.h
+	<iostream>
+	<string>
+	<cstdio>
+	<stdio.h>
+	<string.h>
+	<windows.h>
+	<conio.h>
+	<termios.h>
+	<unistd.h>
+	<sys/ioctl.h>
+	<sys/types.h>
+	<sys/time.h>
+
+1763403500 source:c:\users\vitto\onedrive\desktop\facultad\tpiprogramacion2-main\categorias.cpp
+	"Categorias.h"
+	<cstring>
+	<iostream>
+
+1763403500 source:c:\users\vitto\onedrive\desktop\facultad\tpiprogramacion2-main\clientes.cpp
+	<iostream>
+	<cstring>
+	"rlutil.h"
+	"Clientes.h"
+
+1763403500 source:c:\users\vitto\onedrive\desktop\facultad\tpiprogramacion2-main\fecha.cpp
+	"Fecha.h"
+	<iostream>
+
+1763416082 source:c:\users\vitto\onedrive\desktop\facultad\tpiprogramacion2-main\main.cpp
+	<iostream>
+	<cstdlib>
+	<windows.h>
+	"MenuClientes.h"
+	"Clientes.h"
+	"MenuCarreras.h"
+	"Carrera.h"
+	"Participantes.h"
+	"MenuListados.h"
+	"MenuPagos.h"
+
+1763403500 c:\users\vitto\onedrive\desktop\facultad\tpiprogramacion2-main\menuclientes.h
+
+1763403500 c:\users\vitto\onedrive\desktop\facultad\tpiprogramacion2-main\menucarreras.h
+
+1763403500 c:\users\vitto\onedrive\desktop\facultad\tpiprogramacion2-main\menulistados.h
+
+1763403500 c:\users\vitto\onedrive\desktop\facultad\tpiprogramacion2-main\menupagos.h
+
+1763403500 source:c:\users\vitto\onedrive\desktop\facultad\tpiprogramacion2-main\menucarreras.cpp
+	<iostream>
+	<cstdlib>
+	<ctime>
+	"MenuCarreras.h"
+	"ArchivoCarreras.h"
+	"ArchivoClientes.h"
+	"ArchivoPagos.h"
+	"Carrera.h"
+	"Clientes.h"
+	"Pago.h"
+	"rlutil.h"
+
+1763403500 source:c:\users\vitto\onedrive\desktop\facultad\tpiprogramacion2-main\menuclientes.cpp
+	<iostream>
+	<cstdlib>
+	"Clientes.h"
+	"ArchivoClientes.h"
+	"ArchivoPagos.h"
+	"archivoCarreras.h"
+	"Pago.h"
+	"rlutil.h"
+	"Carrera.h"
+
+1763416184 source:c:\users\vitto\onedrive\desktop\facultad\tpiprogramacion2-main\menulistados.cpp
+	<iostream>
+	<vector>
+	<algorithm>
+	<string>
+	"MenuListados.h"
+	"ArchivoCarreras.h"
+	"Carrera.h"
+	"ArchivoPagos.h"
+	"Pago.h"
+
+1763416104 source:c:\users\vitto\onedrive\desktop\facultad\tpiprogramacion2-main\menupagos.cpp
+	<iostream>
+	<cstdlib>
+	<string>
+	<cstring>
+	"MenuPagos.h"
+	"ArchivoPagos.h"
+	"ArchivoCarreras.h"
+	"ArchivoClientes.h"
+	"Carrera.h"
+	"Clientes.h"
+	"Pago.h"
+	"rlutil.h"
+
+1763403500 source:c:\users\vitto\onedrive\desktop\facultad\tpiprogramacion2-main\pago.cpp
+	"Pago.h"
+	"rlutil.h"
+	"Carrera.h"
+	"Clientes.h"
+	<iostream>
+	<string>
+
+1763403500 source:c:\users\vitto\onedrive\desktop\facultad\tpiprogramacion2-main\participantes.cpp
+	"Participantes.h"
+	<iostream>
+	<cstring>
+
+1763403500 source:c:\users\vitto\onedrive\desktop\facultad\tpiprogramacion2-main\hora.cpp
+	"Hora.h"
+	<iostream>
+	<string>
+

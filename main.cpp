@@ -27,7 +27,7 @@ int main() {
         cout << "   1. Clientes" <<endl;
         cout << "   2. Carreras" <<endl;
         cout << "   3. Pagos" <<endl;
-        cout << "   4. Listados e Informes" <<endl;
+        cout << "   4. Informes" <<endl;
         cout << "   0. Salir" <<endl<<endl;
         cout << "================================\n";
         cout << "   Seleccione una opcion: ";
@@ -40,7 +40,7 @@ int main() {
             case 1: menuClientes(); break;
             case 2: menuCarreras() ; break;
             case 3: menuPagos(); break;
-            case 4: cout << "prev"; break;
+            case 4: menuListados(); break;
             case 0: cout << "Saliendo del sistema..."; break;
             default: cout << "Opcion invalida."; break;
         }

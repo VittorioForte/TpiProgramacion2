@@ -168,6 +168,8 @@ void Carrera::ordenarResultadosPorTiempo() {
 }
 
 
+
+
 // Setters
 void Carrera::setIdCarrera(int idCarrera) {
     _idCarrera = idCarrera;
@@ -189,5 +191,7 @@ Fecha Carrera::getFecha() const { return _fecha; }
 Hora Carrera::getHoraInicio() const { return _horaInicio; }
 Categorias Carrera::getCategoria() const { return _categoria; }
 int Carrera::getCantParticipantes() const { return _cantParticipantes; }
+const Participantes& Carrera::getParticipante(int index) const {return _listaResultados[index]; }
+
 
 
