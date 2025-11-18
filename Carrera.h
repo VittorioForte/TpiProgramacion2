@@ -39,6 +39,7 @@ public:
     int getEstadoCarrera() const;
     Fecha getFecha() const;
     Hora getHoraInicio() const;
+    const Participantes& getParticipante(int index) const;
 
     Categorias getCategoria() const;
     int getCantParticipantes() const;

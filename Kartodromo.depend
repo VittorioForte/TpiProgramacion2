@@ -81,7 +81,7 @@
 	<string>
 	"Carrera.h"
 
-1763349395 c:\users\tatu\desktop\tpiprogramacion2-gnu\carrera.h
+1763485936 c:\users\tatu\desktop\tpiprogramacion2-gnu\carrera.h
 	<iostream>
 	<string>
 	"Fecha.h"
@@ -94,7 +94,7 @@
 	<iostream>
 	<string>
 
-1763071526 source:c:\users\tatu\desktop\tpiprogramacion2-gnu\archivoclientes.cpp
+1763490439 source:c:\users\tatu\desktop\tpiprogramacion2-gnu\archivoclientes.cpp
 	<cstdio>
 	"ArchivoClientes.h"
 
@@ -105,7 +105,7 @@
 1763224810 c:\users\tatu\desktop\tpiprogramacion2-gnu\clientes.h
 	<cstring>
 
-1763349423 source:c:\users\tatu\desktop\tpiprogramacion2-gnu\carrera.cpp
+1763485945 source:c:\users\tatu\desktop\tpiprogramacion2-gnu\carrera.cpp
 	<iostream>
 	<cstring>
 	"Carrera.h"
@@ -121,7 +121,7 @@
 	"Fecha.h"
 	<iostream>
 
-1763225884 source:c:\users\tatu\desktop\tpiprogramacion2-gnu\main.cpp
+1763489626 source:c:\users\tatu\desktop\tpiprogramacion2-gnu\main.cpp
 	<iostream>
 	<cstdlib>
 	<windows.h>
@@ -140,7 +140,7 @@
 1763232044 c:\users\tatu\desktop\tpiprogramacion2-gnu\participantes.h
 	<string>
 
-1763349348 source:c:\users\tatu\desktop\tpiprogramacion2-gnu\menucarreras.cpp
+1763492438 source:c:\users\tatu\desktop\tpiprogramacion2-gnu\menucarreras.cpp
 	<iostream>
 	<cstdlib>
 	<ctime>
@@ -192,11 +192,15 @@
 	"ArchivoCarreras.h"
 	"ArchivoClientes.h"
 
-1763229331 source:c:\users\tatu\desktop\tpiprogramacion2-gnu\menulistados.cpp
-	<vector>
+1763489148 source:c:\users\tatu\desktop\tpiprogramacion2-gnu\menulistados.cpp
+	<iostream>
+	<cstring>
+	<cstdlib>
 	"MenuListados.h"
 	"ArchivoCarreras.h"
 	"Carrera.h"
+	"ArchivoPagos.h"
+	"Pago.h"
 
 1763349153 source:c:\users\tatu\desktop\tpiprogramacion2-gnu\menupagos.cpp
 	<iostream>

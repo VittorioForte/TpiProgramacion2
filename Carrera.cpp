@@ -13,6 +13,10 @@ Carrera::Carrera() {
     _estadoCarrera = 0;
 }
 
+const Participantes& Carrera::getParticipante(int index) const {
+    return _listaResultados[index];
+}
+
 void Carrera::cargar() {
     cout << "=== REGISTRAR NUEVA CARRERA ===" << endl;
     _categoria.cargar();

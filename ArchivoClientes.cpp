@@ -57,7 +57,6 @@ int ArchivoClientes::BuscarPorID(int id) {
     Cliente cliente;
     int pos = 0;
     while (fread(&cliente, sizeof(Cliente), 1, p)) {
-        // La �nica diferencia es esta l�nea:
         if (cliente.getIdCliente() == id && cliente.getEstado()) {
             fclose(p);
             return pos;

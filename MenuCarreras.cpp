@@ -97,15 +97,32 @@ void menuCarreras() {
             }
 
             c.setIdClienteResponsable(idAsignado);
-
             int nuevoID = arch.CantidadRegistros() + 1;
             c.setIdCarrera(nuevoID);
 
-
             if (arch.Guardar(c)) {
-                cout << "Carrera guardada (ID: " << nuevoID << ")." << endl;
-            } else {
-                cout << "Error al guardar la carrera." << endl;
+                cout << "Carrera guardada correctamente (ID: " << nuevoID << ")." << endl;
+
+                if (idAsignado != 0) {
+                    ArchivoPagos archivoPagos("pagos.dat");
+                    Pago pago;
+
+                    pago.setIdPago(archivoPagos.CantidadRegistros() + 1);
+                    pago.setIdCarrera(nuevoID);
+                    pago.setIdCliente(idAsignado);
+                    int montoAbonar = c.getCategoria().getPrecio();
+
+                    pago.setMonto(montoAbonar);
+
+                    pago.setFechaPago(c.getFecha());
+                    pago.setEstado(true);
+
+                    if (archivoPagos.Guardar(pago)) {
+                        cout << ">> Pago registrado automaticamente." << endl;
+                    } else {
+                        cout << ">> ERROR: No se pudo registrar el pago." << endl;
+                    }
+                }
             }
             break;
         }
